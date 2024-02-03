@@ -10,8 +10,8 @@ class PManager(models.Manager):
 
 class News(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')
-    ref = models.TextField()
-    img_src = models.TextField()
+    ref = models.TextField(verbose_name='Ссылка на оригинал')
+    img_src = models.TextField(verbose_name='Ссылка на изображение')
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     is_published = models.BooleanField(default=True, verbose_name='Опубликованно')
