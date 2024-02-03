@@ -27,5 +27,6 @@ for i in range(1, 6):
         title = data.get_text()
         src = url_news + data['href']
         img_src = element.find('img')['src']
-        img = req.get(img_src).content
-        genre = 'Made by StopGame'
+        # obj = News(title=title, img_src=img_src, ref=src)
+        # obj.save()
+

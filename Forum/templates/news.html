@@ -29,7 +29,7 @@
         {% for n in ns %}
           <article>
             <div class="container">
-              <a href="{{ n.ref }}"><img src="{% static  n.img_src %}" alt="picture"></a>
+              <a href="{{ n.ref }}"><img src="{{ n.img_src }}" alt="picture"></a>
               <div class="text_side">
                 <b><a href="{{ n.ref }}"><p>{{ n.title }}</p></a></b>
                 <p class="genre">Made by StopGame</p>
