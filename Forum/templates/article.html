@@ -1,0 +1,27 @@
+{% extends 'base_articles.html'%}
+{% load static %}
+{% block article %}
+{% load article_tags %}
+<article class="area">
+  {% autoescape off %}
+    <div class="article">
+      <div class="header_article">
+        <h1>{{ p.title }}</h1>
+          <article><img src="{% static 'img/159604.png' %}"> {{ p.visits }}</article>
+      </div>
+      {{ p.text }}
+      <p>Автор статьи: <b>{{ p.created_by }}</b></p>
+      <p>Дата и время публикации: <b>{{ date }}</b></p>
+      <p>Жанр: <a href="{{ p.genre.get_absolute_url }}" class="tag">{{ p.genre }}</a></p>
+    </div>
+    <p>Тэги: {% for t in p.tag.all %}
+        {% if not forloop.last %}
+        <a href="{% url 'articles' 'vse-kategorii' %}?tag={{ t.slug }}" class="tag">{{ t.tag }}</a> |
+        {% else %}
+        <a href="{% url 'articles' 'vse-kategorii' %}?tag={{ t.slug }}" class="tag">{{ t.tag }}</a>
+        {% endif %}
+        {% endfor %}
+    </p>
+  {% endautoescape %}
+</article>
+{% endblock %}

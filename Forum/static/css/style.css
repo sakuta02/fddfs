@@ -1,0 +1,118 @@
+body {
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
+}
+.container {
+  display: flex;
+}
+header {
+  margin-right: 10%;
+  margin-left: 10%;
+  margin-top: 1%;
+  font-size: 1.2em;
+}
+header div.container {
+  justify-content: space-around;
+}
+main {
+  margin-right: 10%;
+  margin-left: 10%;
+}
+main > div.container {
+  justify-content: space-between;
+}
+.area {
+  background-color: whitesmoke;
+  height: calc((110px + 2em) * 8 + 50px);
+  width: 74%;
+  border-radius: 1em;
+  display: inline-flex;
+  flex-direction: column;
+}
+main nav {
+  text-align: left;
+  height: 50%;
+  background-color: whitesmoke;
+  border-radius: 1em;
+}
+nav img {
+  margin: 5%;
+  width: 90%;
+}
+nav article {
+  margin: 5%;
+}
+article {
+  margin: 1em;
+}
+main article div.container{
+  display: flex;
+  justify-content: space-between;
+}
+.area article img {
+  height: 110px;
+  width: 196px;
+  border-radius: 1em;
+  display: inline-block;
+}
+.text_side {
+  position: relative;
+  width: calc(100% - 196px - 1em)
+}
+a {
+  color: #333333;
+  text-decoration: none;
+}
+a:hover {
+  color: darkgray;
+}
+.number {
+  display: inline-block;
+}
+.pages {
+  padding-bottom: 3%;
+  text-align: center;
+  font-size: 1.1em;
+}
+footer {
+  width: 99vw;
+  background-color: whitesmoke;
+  height: 10vh;
+  margin-top: 10%;
+}
+footer .container {
+  padding-top: 10px;
+  justify-content: space-around;
+}
+.genre {
+  color: crimson;
+  position: absolute;
+  bottom: 0;
+}
+.git {
+  color: steelblue;
+}
+main .container .vertical {
+  flex-direction: column;
+  width: 25%;
+}
+main .container .vertical :last-child {
+  margin-top: 5%;
+}
+nav h1 {
+  text-align: center;
+}
+.navig {
+  color: crimson;
+}
+.navig:hover {
+  color: darkred;
+}
+.news {
+  display: inline;
+
+}
+.selected {
+  color: darkred;
+}
+

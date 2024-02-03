@@ -1,0 +1,78 @@
+{% load static %}
+{% load article_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>S&M</title>
+  <link rel="shortcut icon" href="{% static 'img/img.png' %}">
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+  </style>
+  <link href="{% static 'css/style_articles.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="container">
+        <div><div class="selected_forum">Форум</div> <div class="inline">| <a href="{% url 'news' 1 %}" class="news">Новости</a></div></div>
+        <div>S&M</div>
+        <div><a href="#">Войти</a></div>
+      </div>
+    </nav>
+    <hr>
+  </header>
+  <main>
+    <div class="container">
+        <div class="genres">
+          <h2>Поиск</h2>
+          <p>Список категорий</p>
+          <ul>
+            {% genres as genres %}
+            {% for g in genres %}
+              {% if g.slug == genre %}
+                  <li><a href="{{ g.get_absolute_url }}" class="selected">{{ g.name }}</a></li>
+              {% else %}
+                  <li><a href="{{ g.get_absolute_url }}">{{ g.name }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        <p>Список тэгов</p>
+          <div class="tags">
+              {% tags as tags %}
+              {% for t in tags %}
+                {% if t.slug == tag %}
+                  <div class="block selected">{{ t.tag }}</div>
+                {% else %}
+                  <a href="?tag={{ t.slug }}"><div class="block">{{ t.tag }}</div></a>
+                {% endif %}
+              {% endfor %}
+          </div>
+        </div>
+      <div class="area">
+        {% articles genre tag as articles %}
+        {% for a in articles %}
+          <article>
+            <div class="container">
+              <a href="{{ a.get_absolute_url }}"><img src="{% static a.img_src %}" alt="picture"></a>
+              <div class="text_side">
+                <p><b><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></b></p>
+                <p><a href="{{ a.genre.get_absolute_url }}" class="genre">{{ a.genre }}</a></p>
+                <p>{% for t in a.tag.all %}
+                  {% if not forloop.last %}
+                  <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a> |
+                  {% else %}
+                  <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a>
+                  {% endif %}{% endfor %}</p>
+              </div>
+            </div>
+            <hr/>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+  <footer>
+  </footer>
+</body>
+</html>

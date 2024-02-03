@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>S&M</title>
+  <link rel="shortcut icon" href="{% static 'img/img.png' %}">
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+  </style>
+  <link href="{% static 'css/style_article.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="container">
+        <div><a href="{% url 'news' 1 %}">S&M</a></div>
+        <div><a href="{% url 'articles' 'Пусто'%}">Форум</a></div>
+        <div><a href="#">Войти</a></div>
+      </div>
+    </nav>
+    <hr>
+  </header>
+  <main>
+    {% block article %}
+    {% endblock %}
+  </main>
+  <footer>
+
+  </footer>
+</body>
+</html>
