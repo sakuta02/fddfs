@@ -14,8 +14,8 @@
   <header>
     <nav>
       <div class="container">
-        <div><a href="{% url 'news' 1 %}">S&M</a></div>
-        <div><a href="{% url 'articles' 'Пусто'%}">Форум</a></div>
+        <div><a class="ref_main" href="{% url 'articles' 'vse-kategorii' %}">Форум</a> | <a href="{% url 'news' 1 %}" class="ref_main">Новости</a></div>
+        <div>S&M</div>
         <div><a href="#">Войти</a></div>
       </div>
     </nav>

@@ -1,0 +1,30 @@
+body {
+  font-family: Nunito, sans-serif;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+header {
+  margin-top: 1%;
+  font-size: 1.2em;
+}
+a {
+    color: crimson;
+    text-decoration: none;
+}
+a:hover {
+    color: darkred;
+}
+div.area {
+    background-color: lavender;
+    border-radius: 1em;
+    height: 80vh;
+    width: 20%;
+    text-align: center;
+}
+.area .head_form {
+    font-size: 1.5em;
+}

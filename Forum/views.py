@@ -29,3 +29,9 @@ def article(request, slug):
 def articles(request, genre: None):
     tag = request.GET.dict().get('tag')
     return render(request, 'articles.html', context={'genre': genre, 'tag': tag})
+
+
+def add_page(request):
+    print(request.POST)
+    return render(request, 'add_page.html')
+

@@ -51,3 +51,9 @@ li {
 .header_article article {
   font-size: 0.9em;
 }
+a.ref_main {
+  color: crimson;
+}
+a.ref_main:hover {
+    color: darkred;
+}
