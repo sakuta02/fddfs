@@ -11,20 +11,62 @@ header {
   margin-top: 1%;
   font-size: 1.2em;
 }
-a {
+a.styled {
     color: crimson;
     text-decoration: none;
 }
-a:hover {
+a:hover.styled {
     color: darkred;
 }
-div.area {
-    background-color: lavender;
-    border-radius: 1em;
-    height: 80vh;
-    width: 20%;
-    text-align: center;
+a {
+  color: #333333;
+  text-decoration: none;
 }
-.area .head_form {
-    font-size: 1.5em;
+a:hover {
+  color: darkgray;
+}
+#id_title.art_title {
+    width: 20vw;
+    height: 2em;
+    border-radius: 1em;
+    padding: 0.5em;
+}
+#id_text {
+    width: 60vw;
+    height: 60vh;
+    border-radius: 1em;
+    padding: 0.5em;
+}
+#id_genre {
+    padding: 0.5em;
+    border-radius: 1em;
+}
+#id_tags {
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+    padding: 0.5em;
+    overflow-y: scroll;
+    width: 10vw
+}
+.form {
+    display: flex;
+    justify-content: center;
+    background-color: whitesmoke;
+    border-radius: 2em;
+}
+.form-row {
+    font-weight: bold;
+}
+button {
+    border-radius: 1em;
+    color: #333333;
+    padding: 0.5em;
+}
+button:hover {
+  color: darkgray;
+}
+.errorlist li {
+    color: red;
+    font-weight: bold;
+    list-style: none;
 }

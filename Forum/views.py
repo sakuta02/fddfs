@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import CustomArticles, News, Genre
 from django.db.models import F
 import datetime
 import locale
+from .forms import AddPostForm
 
 locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
@@ -32,6 +33,18 @@ def articles(request, genre: None):
 
 
 def add_page(request):
-    print(request.POST)
-    return render(request, 'add_page.html')
+    if request.method == 'POST':
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            try:
+                data = form.cleaned_data
+                CustomArticles.objects.create(title=data['title'], text=data['text'], genre=data['genre'])
+                return redirect('articles', 'vse-kategorii')
+            except Exception as ex:
+                print(ex)
+                form.add_error(None, 'Ошибка при добавлении статьи')
+                return render(request, 'add_page.html', {'form': form})
+    else:
+        form = AddPostForm()
+        return render(request, 'add_page.html', {'form': form})
 
