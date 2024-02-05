@@ -2,25 +2,46 @@ body {
   font-family: 'Nunito', sans-serif;
   margin: 0;
 }
+
+a {
+  color: #333333;
+  text-decoration: none;
+}
+
+a:hover {
+  color: darkgray;
+}
+
 .container {
   display: flex;
 }
+
 header {
-  margin-right: 10%;
-  margin-left: 10%;
-  margin-top: 1%;
+  margin: 1% 10%;
   font-size: 1.2em;
 }
-header div.container {
+
+header .container {
   justify-content: space-around;
 }
+
 main {
-  margin-right: 10%;
-  margin-left: 10%;
+  margin: 0 10%;
 }
-main > div.container {
+
+main > .container {
   justify-content: space-between;
 }
+
+main .container .vertical {
+  flex-direction: column;
+  width: 25%;
+}
+
+main .container .vertical :last-child {
+  margin-top: 5%;
+}
+
 .area {
   background-color: whitesmoke;
   height: calc((110px + 2em) * 8 + 50px);
@@ -29,90 +50,92 @@ main > div.container {
   display: inline-flex;
   flex-direction: column;
 }
-main nav {
-  text-align: left;
-  height: 50%;
-  background-color: whitesmoke;
-  border-radius: 1em;
-}
-nav img {
-  margin: 5%;
-  width: 90%;
-}
-nav article {
-  margin: 5%;
-}
-article {
-  margin: 1em;
-}
-main article div.container{
-  display: flex;
-  justify-content: space-between;
-}
+
 .area article img {
   height: 110px;
   width: 196px;
   border-radius: 1em;
   display: inline-block;
 }
+
 .text_side {
   position: relative;
   width: calc(100% - 196px - 1em)
 }
-a {
-  color: #333333;
-  text-decoration: none;
+
+main nav {
+  text-align: left;
+  height: 50%;
+  background-color: whitesmoke;
+  border-radius: 1em;
 }
-a:hover {
-  color: darkgray;
+
+nav img {
+  margin: 5%;
+  width: 90%;
 }
-.number {
-  display: inline-block;
-}
-.pages {
-  padding-bottom: 3%;
+
+nav h1 {
   text-align: center;
-  font-size: 1.1em;
 }
+
+.navig {
+  color: crimson;
+}
+
+.navig:hover {
+  color: darkred;
+}
+
+article {
+  margin: 1em;
+}
+
+main article .container{
+  display: flex;
+  justify-content: space-between;
+}
+
+nav article {
+  margin: 5%;
+}
+
 footer {
   width: 99vw;
   background-color: whitesmoke;
   height: 10vh;
   margin-top: 10%;
 }
+
 footer .container {
   padding-top: 10px;
   justify-content: space-around;
 }
+
 .genre {
   color: crimson;
   position: absolute;
   bottom: 0;
 }
+
 .git {
   color: steelblue;
 }
-main .container .vertical {
-  flex-direction: column;
-  width: 25%;
+
+.number {
+  display: inline-block;
 }
-main .container .vertical :last-child {
-  margin-top: 5%;
-}
-nav h1 {
+
+.pages {
+  padding-bottom: 3%;
   text-align: center;
+  font-size: 1.1em;
 }
-.navig {
-  color: crimson;
-}
-.navig:hover {
-  color: darkred;
-}
+
 .news {
   display: inline;
-
 }
+
 .selected {
   color: darkred;
 }
-
