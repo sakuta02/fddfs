@@ -23,12 +23,21 @@
       <div class="form">
           <form method="POST">
               {% csrf_token %}
-                {{ form.non_field_errors }}
-              {% for el in form %}
-                  <p class="form-row"><label for="{{ el.id_for_label }}"> {{ el.label }} </label></p><p>{{ el }}</p>
-                  <p class="err"> {{ el.errors }} </p>
-              {% endfor %}
-              <p><button type="submit"><b>Отправить</b></button></p>
+              <p class="form-row"><label for="{{ form.title.id_for_label }}"> {{ form.title.label }}<p>напишите пару слов, чтобы привлечь читателя</p> </label></p><p>{{ form.title }}</p>
+              <p class="err"> {{ el.errors }} </p>
+              <p class="form-row"><label for="{{ form.text.id_for_label }}"> {{ form.text.label }}<p>в тексте не приветствуются маты и оскорбления</p> </label></p><p>{{ form.text }}</p>
+              <p class="err"> {{ el.errors }} </p>
+              <div class="container genres_flex">
+                  <article class="genres_in_flex">
+                      <p class="form-row"><label for="{{ form.tags.id_for_label }}"> {{ form.tags.label }} </label></p><p>{{ form.tags }}</p>
+                      <p class="err"> {{ el.errors }} </p>
+                  </article>
+                  <article class="genres_in_flex">
+                      <p class="form-row"><label for="{{ form.genre.id_for_label }}"> {{ form.genre.label }} </label></p><p>{{ form.genre }}</p>
+                      <p class="err"> {{ el.errors }} </p>
+                  </article>
+              </div>
+              <p><button type="submit"><b>Отправить</b></button> {{ form.non_field_errors }}</p>
           </form>
       </div>
   </main>

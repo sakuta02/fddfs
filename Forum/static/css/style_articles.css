@@ -59,7 +59,9 @@ main article .container{
 .text_side {
   width: calc(100% - 196px - 1em)
 }
-
+.text_side_space p{
+  margin: 0.3em;
+}
 article {
   margin: 1em;
 }

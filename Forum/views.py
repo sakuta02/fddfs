@@ -9,7 +9,6 @@ from .forms import AddPostForm
 
 locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
-
 def news_view(request, page):
     return render(request, 'news.html', context={'page': page})
 
@@ -36,14 +35,18 @@ def add_page(request):
     if request.method == 'POST':
         form = AddPostForm(request.POST)
         if form.is_valid():
+            # try:
+            # data = form.cleaned_data
+            #     CustomArticles.objects.create(title=data['title'], text=data['text'], genre=data['genre'])
+            #     return redirect('articles', 'vse-kategorii')
+            # except Exception as ex:
+            #     print(ex)
+            #     form.add_error(None, 'Ошибка при добавлении статьи')
             try:
-                data = form.cleaned_data
-                CustomArticles.objects.create(title=data['title'], text=data['text'], genre=data['genre'])
-                return redirect('articles', 'vse-kategorii')
-            except Exception as ex:
-                print(ex)
-                form.add_error(None, 'Ошибка при добавлении статьи')
-                return render(request, 'add_page.html', {'form': form})
+                form.save()
+            except:
+                form.add_error(None, 'Ошибка при добавлении статьи. Возможно вы указали заголовок, который уже существует')
+        return render(request, 'add_page.html', {'form': form})
     else:
         form = AddPostForm()
         return render(request, 'add_page.html', {'form': form})

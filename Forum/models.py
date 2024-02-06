@@ -38,7 +38,7 @@ class CustomArticles(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)), default=Status.PUBLISHED, verbose_name='Опубликовано')
-    text = models.TextField(default='Эта статья была опубликована без текста', verbose_name='Текст статьи')
+    text = models.TextField(verbose_name='Текст статьи')
     published = PManager()
     objects = models.Manager()
     tag = models.ManyToManyField(to='TagPost', blank=True, related_name='tags', verbose_name='Тэги')

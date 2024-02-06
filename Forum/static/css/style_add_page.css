@@ -32,36 +32,36 @@ a:hover.styled {
 }
 
 #id_title.art_title {
-  width: 20vw;
-  height: 2em;
-  border-radius: 1em;
+  width: 100%;
+  height: 1.5em;
+  border-radius: 0.5em;
   padding: 0.5em;
 }
 
 #id_text {
-  width: 60vw;
-  height: 60vh;
-  border-radius: 1em;
+  width: 100%;
+  height: 60%;
+  border-radius: 0.5em;
   padding: 0.5em;
 }
 
 #id_genre {
   padding: 0.5em;
-  border-radius: 1em;
+  border-radius: 0.5em;
 }
 
 #id_tags {
   border-radius: 1em 0 0 1em;
   padding: 0.5em;
   overflow-y: scroll;
-  width: 10vw;
+  width: 100%;
+  height: 20vh;
+
 }
 
 .form {
   display: flex;
   justify-content: center;
-  background-color: whitesmoke;
-  border-radius: 2em;
 }
 
 .form-row {
@@ -82,4 +82,18 @@ button:hover {
   color: red;
   font-weight: bold;
   list-style: none;
+  margin: 0;
+  list-style-position: outside;
+}
+form {
+  width: 60vw;
+  background-color: whitesmoke;
+  padding: 3em;
+  border-radius: 1em;
+}
+.genres_flex {
+  justify-content: left;
+}
+.genres_in_flex {
+  margin-right: 2em;
 }

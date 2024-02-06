@@ -53,22 +53,41 @@
       <div class="area">
         {% articles genre tag as articles %}
         {% for a in articles %}
+        {% if a.img_src %}
           <article>
             <div class="container">
               <a href="{{ a.get_absolute_url }}"><img src="{% static a.img_src %}" alt="picture"></a>
               <div class="text_side">
                 <p><b><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></b></p>
                 <p><a href="{{ a.genre.get_absolute_url }}" class="genre">{{ a.genre }}</a></p>
+              {% if a.tag %}
                 <p>{% for t in a.tag.all %}
                   {% if not forloop.last %}
                   <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a> |
                   {% else %}
                   <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a>
                   {% endif %}{% endfor %}</p>
+              {% endif %}
               </div>
             </div>
             <hr/>
           </article>
+        {% else %}
+        <article>
+        <div class="text_side_space">
+            <p><b><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></b></p>
+            <p><a href="{{ a.genre.get_absolute_url }}" class="genre">{{ a.genre }}</a></p>
+            <p>{% for t in a.tag.all %}
+              {% if not forloop.last %}
+              <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a> |
+              {% else %}
+              <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a>
+              {% endif %}{% endfor %}</p>
+        </div>
+        <hr>
+        </article>
+        {% endif %}
+
         {% endfor %}
       </div>
     </div>
