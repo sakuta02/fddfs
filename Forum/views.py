@@ -6,6 +6,7 @@ from django.db.models import F
 import datetime
 import locale
 from .forms import AddPostForm
+from slugify import slugify
 
 locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
@@ -35,19 +36,20 @@ def add_page(request):
     if request.method == 'POST':
         form = AddPostForm(request.POST)
         if form.is_valid():
-            # try:
-            # data = form.cleaned_data
-            #     CustomArticles.objects.create(title=data['title'], text=data['text'], genre=data['genre'])
-            #     return redirect('articles', 'vse-kategorii')
-            # except Exception as ex:
-            #     print(ex)
-            #     form.add_error(None, 'Ошибка при добавлении статьи')
             try:
                 form.save()
-            except:
+                form.instance.img = request.FILES['img']
+                form.save()
+                return HttpResponseRedirect(reverse('articles', args=['vse-kategorii']))
+            except Exception as e:
                 form.add_error(None, 'Ошибка при добавлении статьи. Возможно вы указали заголовок, который уже существует')
         return render(request, 'add_page.html', {'form': form})
     else:
         form = AddPostForm()
         return render(request, 'add_page.html', {'form': form})
 
+
+def save_image(name, img):
+    with open(fr'Forum/static/img/{name}-{img.name}', 'wb+') as f:
+        for chunk in img.chunks():
+            f.write(chunk)

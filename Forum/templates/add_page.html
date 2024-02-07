@@ -21,20 +21,24 @@
   </header>
   <main>
       <div class="form">
-          <form method="POST">
+          <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               <p class="form-row"><label for="{{ form.title.id_for_label }}"> {{ form.title.label }}<p>напишите пару слов, чтобы привлечь читателя</p> </label></p><p>{{ form.title }}</p>
-              <p class="err"> {{ el.errors }} </p>
+              <p class="err"> {{ form.title.errors }} </p>
               <p class="form-row"><label for="{{ form.text.id_for_label }}"> {{ form.text.label }}<p>в тексте не приветствуются маты и оскорбления</p> </label></p><p>{{ form.text }}</p>
-              <p class="err"> {{ el.errors }} </p>
+              <p class="err"> {{ form.text.errors }} </p>
               <div class="container genres_flex">
                   <article class="genres_in_flex">
-                      <p class="form-row"><label for="{{ form.tags.id_for_label }}"> {{ form.tags.label }} </label></p><p>{{ form.tags }}</p>
-                      <p class="err"> {{ el.errors }} </p>
+                      <p class="form-row"><label for="{{ form.tag.id_for_label }}"> {{ form.tag.label }} </label></p><p>{{ form.tag }}</p>
+                      <p class="err"> {{ form.tag.errors }} </p>
                   </article>
                   <article class="genres_in_flex">
                       <p class="form-row"><label for="{{ form.genre.id_for_label }}"> {{ form.genre.label }} </label></p><p>{{ form.genre }}</p>
-                      <p class="err"> {{ el.errors }} </p>
+                      <p class="err"> {{ form.genre.errors }} </p>
+                  </article>
+                  <article class="genres_in_flex">
+                      <p class="form-row"><label for="{{ form.img.id_for_label }}"> {{ form.img.label }} </label></p><p>{{ form.img }}</p>
+                      <p class="err"> {{ form.img.errors }} </p>
                   </article>
               </div>
               <p><button type="submit"><b>Отправить</b></button> {{ form.non_field_errors }}</p>

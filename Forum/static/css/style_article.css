@@ -68,3 +68,6 @@ a.ref_main:hover {
 .tag:hover {
   color: darkred;
 }
+pre {
+    font-family: Nunito, sans-serif;
+}

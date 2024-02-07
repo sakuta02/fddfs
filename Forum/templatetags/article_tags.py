@@ -1,4 +1,5 @@
 from django import template
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 
 from ..models import News, CustomArticles, Genre, TagPost
@@ -9,10 +10,7 @@ register = template.Library()
 
 @register.simple_tag()
 def news(page):
-    if page == 1:
-        return News.published.all()[0: 7]
-    else:
-        return News.published.all()[(page * 7):(page * 7) + 7]
+    return Paginator(News.published.all(), 7).page(page)
 
 
 @register.simple_tag()

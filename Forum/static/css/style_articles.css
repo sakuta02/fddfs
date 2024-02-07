@@ -63,7 +63,7 @@ main article .container{
   margin: 0.3em;
 }
 article {
-  margin: 1em;
+  margin: 0.8em;
 }
 
 .genre {
@@ -135,4 +135,7 @@ a {
 
 a:hover {
   color: darkgray;
+}
+.text_side p {
+  margin: 0.5em;
 }

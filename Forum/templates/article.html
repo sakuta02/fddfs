@@ -9,7 +9,7 @@
         <h1>{{ p.title }}</h1>
           <article><img src="{% static 'img/159604.png' %}"> {{ p.visits }}</article>
       </div>
-      {{ p.text|linebreaks }}
+        <pre><p>{{ p.text|linebreaks }}</p></pre>
       <p>Автор статьи: <b>{{ p.created_by }}</b></p>
       <p>Дата и время публикации: <b>{{ date }}</b></p>
       <p>Жанр: <a href="{{ p.genre.get_absolute_url }}" class="tag">{{ p.genre }}</a></p>

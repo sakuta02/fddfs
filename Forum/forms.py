@@ -10,11 +10,11 @@ class AddPostForm(forms.ModelForm):
     # text = forms.CharField(widget=forms.Textarea(attrs={'class': 'art_content'}), label='Содержание статьи')
     genre = forms.ModelChoiceField(queryset=Genre.objects.exclude(slug='vse-kategorii'), label='Выбор жанра статьи',
                                    empty_label=None)
-    tags = forms.ModelMultipleChoiceField(queryset=TagPost.objects.all(), label='Доступные тэги')
+    tag = forms.ModelMultipleChoiceField(queryset=TagPost.objects.all(), label='Доступные тэги')
 
     class Meta:
         model = CustomArticles
-        fields = ('title', 'text')
+        fields = ('title', 'text', 'img', 'genre', 'tag')
         widgets = {'title': forms.TextInput(attrs={'class': 'art_title'}),
                    'text': forms.Textarea(attrs={'class': 'art_content'})}
-        labels = {'title': 'Заголовок статьи:', 'text': 'Содержание статьи:'}
+        labels = {'title': 'Заголовок статьи:', 'text': 'Содержание статьи:', 'img': 'Вы можете загрузить фотографию к посту'}

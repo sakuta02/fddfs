@@ -50,7 +50,7 @@ a:hover.styled {
   border-radius: 0.5em;
 }
 
-#id_tags {
+#id_tag {
   border-radius: 1em 0 0 1em;
   padding: 0.5em;
   overflow-y: scroll;
@@ -96,4 +96,8 @@ form {
 }
 .genres_in_flex {
   margin-right: 2em;
+}
+#id_img {
+  font-weight: bold;
+  font-family: 'Nunito', sans-serif;
 }
