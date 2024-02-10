@@ -15,7 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls.static import static
 from django.urls import path, include
+
+from . import settings
 from .views import main_url
 
 urlpatterns = [
@@ -26,3 +29,5 @@ urlpatterns = [
 ]
 
 admin.site.site_header = "Панель администрирования"
+if settings.DEBUG:
+    urlpatterns += static(str(settings.MEDIA_ROOT), document_root=str(settings.MEDIA_ROOT))

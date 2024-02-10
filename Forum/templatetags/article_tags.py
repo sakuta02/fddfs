@@ -27,21 +27,6 @@ def pages(page):
     return range(start, end)
 
 
-@register.simple_tag()
-def articles(genre: None, tag: None):
-    genre = get_object_or_404(Genre, slug=genre)
-    if tag is not None:
-        tag = get_object_or_404(TagPost, slug=tag)
-        if genre.id != 1:
-            return tag.tags.filter(genre=genre, is_published=1).select_related('genre').prefetch_related('tag')
-        else:
-            return tag.tags.filter(is_published=1).prefetch_related('tag')
-    else:
-        if genre.id != 1:
-            return CustomArticles.published.filter(genre=genre).select_related('genre')
-        else:
-            return CustomArticles.published.all()
-
 
 @register.simple_tag()
 def genres():

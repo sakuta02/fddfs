@@ -1,11 +1,14 @@
 from django.contrib import admin, messages
+from django.utils.safestring import mark_safe
+
 from .models import CustomArticles, News, Genre, TagPost
 
 
 @admin.register(CustomArticles)
 class ArticleAdmin(admin.ModelAdmin):
-    readonly_fields = ['created_at', 'updated_at', 'slug', 'visits']
-    list_display = ('id', 'title', 'genre', 'created_at', 'updated_at', 'is_published', 'brief_info')
+    readonly_fields = ['created_at', 'updated_at', 'slug', 'visits', 'show_img_post']
+    fields = ['title', 'show_img_post', 'img', 'text', 'genre', 'tag', 'created_at', 'updated_at', 'slug', 'visits', 'is_published']
+    list_display = ('id', 'title', 'show_img', 'genre', 'created_at', 'updated_at', 'is_published')
     list_display_links = ('id', 'title')
     ordering = ('-updated_at', )
     list_editable = ('is_published', 'genre')
@@ -13,9 +16,17 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ['title', 'genre__name']
     list_filter = ['genre', 'is_published']
 
-    @admin.display(description='Длина')
-    def brief_info(self, customarticle: CustomArticles):
-        return f'{len(customarticle.text)} символов'
+    @admin.display(description='Фото')
+    def show_img(self, customarticle: CustomArticles):
+        if customarticle.img:
+            return mark_safe(f'<img src="/aboba{customarticle.img.url}" width=100>')
+        return 'Без фото'
+
+    @admin.display(description='Фото')
+    def show_img_post(self, customarticle: CustomArticles):
+        if customarticle.img:
+            return mark_safe(f'<img src="/aboba{customarticle.img.url}" width=500>')
+        return 'Без фото'
 
     @admin.action(description='Опубликовать')
     def set_published(self, request, queryset):
