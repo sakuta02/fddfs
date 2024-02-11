@@ -15,7 +15,7 @@
   <header>
     <nav>
       <div class="container">
-        <div><a href="{% url 'articles' 'vse-kategorii' %}" class="navig">Форум</a> | <div class="selected news">Новости</div></div>
+        <div><a href="{% url 'articles' 'vse-kategorii' '1'%}" class="navig">Форум</a> | <div class="selected news">Новости</div></div>
         <div>S&M</div>
         <div><a href="#">Войти</a></div>
       </div>
@@ -25,8 +25,7 @@
   <main>
     <div class="container">
       <div class="area">
-        {% news page as ns %}
-        {% for n in ns %}
+        {% for n in news %}
           <article>
             <div class="container">
               <a href="{{ n.ref }}"><img src="{{ n.img_src }}" alt="picture"></a>
@@ -38,17 +37,19 @@
             <hr>
           </article>
         {% endfor %}
-        <div class="pages">
-            {% pages page as pages %}
-            {% for p in pages %}
-              {% if p != page %}
-              <div class="number"><a href="{% url 'news' p %}">{{ p }}</a></div>
-              {% else %}
-                  <div class="number"><b>{{ p }}</b></div>
-              {% endif %}
-            {% endfor %}
-              <div class="number">...</div>
-        </div>
+          {% if page_obj.has_other_pages %}
+          <nav class="pages">
+              {% for p in paginator.page_range %}
+                  {% if p <= page|add:4 and p >= page|add:-4 %}
+                      {% if p != page %}
+                        <a class='page' href="{% url 'news' p %}"> {{ p }} </a>
+                      {% else %}
+                          <div class="page"><b> {{ p }} </b></div>
+                      {% endif %}
+                  {% endif %}
+              {% endfor %}
+          </nav>
+          {% endif %}
       </div>
         <div class="container vertical">
           <nav>
@@ -63,7 +64,7 @@
           <nav>
             <article>
               <h1>S&M - форум об играх и не только.</h1>
-              <p>Форум находится в режиме постоянной доработки. Для технической поддержки, сотрудничества, рекламы или баг-репорта писать на почту: <b>savam.0510@gmail.com</b></p>
+                <p><b>Здесь могла быть ваша реклама</b>. Для технической поддержки, сотрудничества, рекламы или баг-репорта писать на почту: <b>savam.0510@gmail.com</b></p>
             </article>
           </nav>
         </div>

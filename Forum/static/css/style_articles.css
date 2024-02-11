@@ -139,3 +139,12 @@ a:hover {
 .text_side p {
   margin: 0.5em;
 }
+nav.pages {
+  display: flex;
+  justify-content: center;
+}
+.page {
+  margin: 0.1em;
+  font-size: 1.1em;
+
+}

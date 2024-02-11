@@ -16,9 +16,9 @@
     </div>
     <p>Тэги: {% for t in p.tag.all %}
         {% if not forloop.last %}
-        <a href="{% url 'articles' 'vse-kategorii' %}?tag={{ t.slug }}" class="tag">{{ t.tag }}</a> |
+        <a href="{% url 'articles' 'vse-kategorii' '1' %}?tag={{ t.slug }}" class="tag">{{ t.tag }}</a> |
         {% else %}
-        <a href="{% url 'articles' 'vse-kategorii' %}?tag={{ t.slug }}" class="tag">{{ t.tag }}</a>
+        <a href="{% url 'articles' 'vse-kategorii' '1' %}?tag={{ t.slug }}" class="tag">{{ t.tag }}</a>
         {% endif %}
         {% endfor %}
     </p>

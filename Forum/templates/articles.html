@@ -86,8 +86,20 @@
         <hr>
         </article>
         {% endif %}
-
         {% endfor %}
+          {% if page_obj.has_other_pages %}
+              <nav class="pages">
+                  {% for p in paginator.page_range %}
+                      {% if p <= page|add:4 and p >= page|add:-4 %}
+                          {% if p != page %}
+                            <a class='page' href="{% url 'articles' genre p%}">{{ p }}</a>
+                          {% else %}
+                              <div class="page"><b>{{ p }}</b></div>
+                          {% endif %}
+                      {% endif %}
+                  {% endfor %}
+              </nav>
+          {% endif %}
       </div>
     </div>
   </main>

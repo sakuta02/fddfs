@@ -3,30 +3,34 @@ from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .models import CustomArticles, Genre, TagPost
+from .models import CustomArticles, Genre, TagPost, News
 import locale
 from .forms import AddPostForm
+from .utils import DataMixin
 
 locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
 
-def news_view(request, page):
-    return render(request, 'news.html', context={'page': page})
-
-
+# redirect Views --------------------------------------------------------
 def news_url(request):
     return HttpResponseRedirect(redirect_to=reverse('news', args=(1,)))
 
-
-class ShowPost(DetailView):
-    template_name = 'article.html'
-    context_object_name = 'p'
-
-    def get_object(self, queryset=None):
-        return get_object_or_404(CustomArticles.published, slug=self.kwargs['slug'])
+# Отображение контента --------------------------------------------------
 
 
-class Articles(ListView):
+class NewsListView(DataMixin, ListView):
+    model = News
+    flag = 2
+    template_name = 'news.html'
+    context_object_name = 'news'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context, page=self.kwargs['page'])
+
+
+class Articles(DataMixin, ListView):
+    flag = 1
     template_name = 'articles.html'
     context_object_name = 'articles'
 
@@ -47,12 +51,20 @@ class Articles(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['genre'] = self.kwargs['genre']
-        context['tag'] = self.request.GET.dict().get('tag')
-        return context
+        return self.get_mixin_context(context, genre=self.kwargs['genre'], tag=self.request.GET.dict().get('tag'),
+                                      page=self.kwargs['page'])
 
 
 # Работа с кастомными записями ------------------------------------------
+
+class ShowPost(DetailView):
+    template_name = 'article.html'
+    context_object_name = 'p'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(CustomArticles.published, slug=self.kwargs['slug'])
+
+
 class AddPage(CreateView):
     form_class = AddPostForm
     template_name = 'add_page.html'

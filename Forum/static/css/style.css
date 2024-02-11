@@ -49,6 +49,7 @@ main .container .vertical :last-child {
   border-radius: 1em;
   display: inline-flex;
   flex-direction: column;
+  padding-bottom: 3em;
 }
 
 .area article img {
@@ -122,20 +123,19 @@ footer .container {
   color: steelblue;
 }
 
-.number {
-  display: inline-block;
-}
-
-.pages {
-  padding-bottom: 3%;
-  text-align: center;
-  font-size: 1.1em;
-}
-
 .news {
   display: inline;
 }
 
 .selected {
   color: darkred;
+}
+nav.pages {
+  display: flex;
+  justify-content: center;
+}
+.page {
+  margin: 0.1em;
+  font-size: 1.1em;
+
 }

@@ -77,7 +77,7 @@ class Genre(models.Model):
         verbose_name_plural = 'Жанры'
 
     def get_absolute_url(self):
-        url = reverse('articles', kwargs={'genre': self.slug})
+        url = reverse('articles', kwargs={'genre': self.slug, 'page': 1})
         return url
 
 
