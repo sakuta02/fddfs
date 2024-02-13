@@ -15,7 +15,11 @@
     <nav class="container">
       <div><a class="styled" href="{% url 'articles' 'vse-kategorii' '1'%}">Форум</a> | <a href="{% url 'news' 1 %}" class="styled">Новости</a></div>
       <div>S&M</div>
-      <div><a href="#">Войти</a></div>
+          {% if user.is_authenticated %}
+            <div>{{ user.username }}</div>
+          {% else %}
+            <div><a href="{% url 'users:log_in' %}">Войти</a></div>
+          {% endif %}
     </nav>
     <hr>
   </header>

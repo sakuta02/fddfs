@@ -1,0 +1,50 @@
+body {
+  font-family: Nunito, sans-serif;
+}
+.container {
+  display: flex;
+}
+header {
+  margin: 1% 10%;
+  font-size: 1.2em;
+}
+header .container {
+  justify-content: space-around;
+}
+.low_colored {
+  color: darkgray;
+}
+a {
+  color: dimgrey;
+  text-decoration: none;
+}
+a:hover {
+  color: darkgray;
+}
+a.ref_main {
+  color: crimson;
+}
+
+a.ref_main:hover {
+  color: darkred;
+}
+.container.area {
+  justify-content: center;
+}
+.form_area {
+  background-color: whitesmoke;
+  width: 30vw;
+  height: 50vh;
+  border-radius: 1em;
+  padding: 1em;
+}
+button[type="submit"] {
+  border-radius: 1em;
+  width: 7em;
+  height: 2.5em;
+}
+.errorlist li {
+  color: #a41515;
+  font-weight: bold;
+  margin: 0;
+}

@@ -17,7 +17,11 @@
       <div class="container">
         <div><a href="{% url 'articles' 'vse-kategorii' '1'%}" class="navig">Форум</a> | <div class="selected news">Новости</div></div>
         <div>S&M</div>
-        <div><a href="#">Войти</a></div>
+          {% if user.is_authenticated %}
+            <div>{{ user.username }}</div>
+          {% else %}
+            <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
+          {% endif %}
       </div>
     </nav>
     <hr>

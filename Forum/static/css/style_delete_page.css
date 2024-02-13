@@ -14,7 +14,7 @@ header {
 }
 
 a {
-  color: #333333;
+  color: dimgrey;
   text-decoration: none;
 }
 
@@ -38,7 +38,7 @@ a:hover.styled {
 
 button {
   border-radius: 1em;
-  color: #333333;
+  color: dimgrey;
   padding: 0.5em;
 }
 
@@ -49,9 +49,8 @@ button:hover {
 .errorlist li {
   color: red;
   font-weight: bold;
-  list-style: none;
   margin: 0;
-  list-style-position: outside;
+  list-style: none outside none;
 }
 
 form {

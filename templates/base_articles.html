@@ -16,7 +16,11 @@
       <div class="container">
         <div><a class="ref_main" href="{% url 'articles' 'vse-kategorii' '1' %}">Форум</a> | <a href="{% url 'news' 1 %}" class="ref_main">Новости</a></div>
         <div>S&M</div>
-        <div><a href="#">Войти</a></div>
+          {% if user.is_authenticated %}
+            <div>{{ user.username }}</div>
+          {% else %}
+            <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
+          {% endif %}
       </div>
     </nav>
     <hr>

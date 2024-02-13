@@ -4,7 +4,7 @@ body {
 }
 
 a {
-  color: #333333;
+  color: dimgrey;
   text-decoration: none;
 }
 
@@ -66,7 +66,6 @@ main .container .vertical :last-child {
 
 main nav {
   text-align: left;
-  height: 50%;
   background-color: whitesmoke;
   border-radius: 1em;
 }
