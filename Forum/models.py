@@ -1,6 +1,7 @@
 from django.db import models
 from slugify import slugify
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 
 class PManager(models.Manager):
@@ -32,9 +33,7 @@ class CustomArticles(models.Model):
         PUBLISHED = (1, 'Да')
     title = models.CharField(max_length=255, verbose_name='Название')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, blank=True, verbose_name='слаг')
-    # img_src = models.TextField(blank=True, null=True, verbose_name='Путь до изображения')
     img = models.ImageField(verbose_name='фото', upload_to='custom_photos/%Y/%m', blank=True)
-    created_by = models.CharField(max_length=255, verbose_name='Автор поста', default='admin')
     genre = models.ForeignKey('Genre', on_delete=models.PROTECT, null=True, verbose_name='Жанр')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
@@ -44,6 +43,8 @@ class CustomArticles(models.Model):
     objects = models.Manager()
     tag = models.ManyToManyField(to='TagPost', blank=True, related_name='tags', verbose_name='Тэги')
     visits = models.IntegerField(default=0, verbose_name='Посещения')
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='posts', null=True, blank=True, verbose_name='Автор поста')
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save()

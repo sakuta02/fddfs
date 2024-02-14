@@ -1,41 +1,16 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>S&M</title>
-    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
-    </style>
-</head>
-<body>
-    <header>
-    <nav>
-      <div class="container">
-        <div><a class="ref_main" href="{% url 'articles' 'vse-kategorii' '1' %}">Форум</a> | <a href="{% url 'news' 1 %}" class="ref_main">Новости</a></div>
-        <div>S&M</div>
-        <div class="low_colored">Выполняется вход...</div>
-      </div>
-    </nav>
-    <hr>
-    </header>
-    <main>
-        <article class="container area">
-            <div class="form_area">
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ next }}" />
-                    {{ form.non_field_errors }}
-                    <p class="form-row"><label for="{{ form.username.id_for_label }}"></label>{{ form.username }}</p>
-                    {{ form.username.errors }}
-                    <p class="form-row"><label for="{{ form.password.id_for_label }}"></label>{{ form.password }}</p>
-                    {{ form.password.errors }}
-                    <button type="submit"><b>Войти</b></button>
-                </form>
-            </div>
-        </article>
-    </main>
-
-</body>
-</html>
+{% extends 'base_login.html' %}
+{% block form %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next|default:'/forum/news/1/' }}" />
+        {{ form.non_field_errors }}
+        <p class="form-row"><label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>{{ form.username }}</p>
+        {{ form.username.errors }}
+        <p class="form-row"><label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>{{ form.password }}</p>
+        {{ form.password.errors }}
+        <a href="{% url 'users:register' %}">Регистрация</a>
+        <div class="center">
+            <button type="submit"><b>Войти</b></button>
+        </div>
+    </form>
+{% endblock %}

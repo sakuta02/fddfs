@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CustomArticles, Genre, TagPost, News
 import locale
 from .forms import AddPostForm
@@ -13,7 +13,7 @@ locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
 # redirect Views --------------------------------------------------------
 def news_url(request):
-    return HttpResponseRedirect(redirect_to=reverse('news', args=(1,)))
+    return HttpResponseRedirect(redirect_to=reverse('news', args=(1, )))
 
 # Отображение контента --------------------------------------------------
 
@@ -65,12 +65,13 @@ class ShowPost(DetailView):
         return get_object_or_404(CustomArticles.published, slug=self.kwargs['slug'])
 
 
-class AddPage(CreateView):
+class AddPage(LoginRequiredMixin, CreateView):
     form_class = AddPostForm
     template_name = 'add_page.html'
 
     def form_valid(self, form):
-        form.save()  # Добавить валидатор для слага
+        article = form.save(commit=False)  # Добавить валидатор для слага
+        article.author = self.request.user
         return super().form_valid(form)
 
 

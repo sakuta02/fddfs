@@ -132,4 +132,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGOUT_REDIRECT_URL = 'news'
+LOGIN_REDIRECT_URL = 'main-url'
+LOGOUT_REDIRECT_URL = 'main-url'
+LOGIN_URL = 'users:log_in'

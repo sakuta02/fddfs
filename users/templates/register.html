@@ -1,0 +1,19 @@
+{% extends 'base_login.html' %}
+{% block form %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <p class="form-row"><label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>{{ form.username }}</p>
+        {{ form.username.errors }}
+        <p class="form-row"><label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>{{ form.email }}</p>
+        {{ form.email.errors }}
+        <p class="form-row"><label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>{{ form.password1 }}</p>
+        {{ form.password1.errors }}
+        <p class="form-row"><label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>{{ form.password2 }}</p>
+        {{ form.password2.errors }}
+        <a href="{% url 'users:log_in' %}">Войти</a>
+        <div class="center">
+            <button type="submit"><b>Регистрация</b></button>
+        </div>
+    </form>
+{% endblock %}
