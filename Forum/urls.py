@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import news_url, AddPage, Articles, ShowPost, EditPage, DeletePage, NewsListView
+from .views import news_url, AddPage, Articles, ShowPost, EditPage, DeletePage, NewsListView, ShowProfile
 
 urlpatterns = [
     path('news/<int:page>/', NewsListView.as_view(), name='news'),
@@ -8,5 +8,6 @@ urlpatterns = [
     path('articles/add_page/', AddPage.as_view(), name='add_page'),
     path('articles/<str:genre>/<int:page>', Articles.as_view(), name='articles'),
     path('articles/edit/<slug:slug>/', EditPage.as_view(), name='edit_page'),
-    path('articles/delete/<slug:slug>/', DeletePage.as_view(), name='delete_page')
+    path('articles/delete/<slug:slug>/', DeletePage.as_view(), name='delete_page'),
+    path('profile/<int:id>', ShowProfile.as_view(), name='profile')
 ]

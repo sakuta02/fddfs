@@ -9,7 +9,7 @@
         <h1>{{ p.title }}</h1>
           <article><img src="{% static 'img/159604.png' %}"> {{ p.visits }}</article>
       </div>
-        <pre><p>{{ p.text|linebreaks }}</p></pre>
+        {{ p.text|linebreaks }}
       <p>Автор статьи: <b>{{ p.author.username|default:"Не известен" }}</b></p>
       <p>Дата и время публикации: <b>{{ date }}</b></p>
       <p>Жанр: <a href="{{ p.genre.get_absolute_url }}" class="tag">{{ p.genre }}</a></p>
@@ -22,6 +22,17 @@
         {% endif %}
         {% endfor %}
     </p>
+      {% if auth %}
+        <p>
+          <a href="{% url 'edit_page' slug %}">Редактировать</a>
+        </p>
+      {% endif %}
+      {% if auth %}
+        <p>
+          <a href="{% url 'delete_page' slug %}">Удалить пост</a>
+        </p>
+      {% endif %}
+
   {% endautoescape %}
 </article>
 {% endblock %}

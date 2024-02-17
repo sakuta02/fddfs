@@ -1,0 +1,31 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block style %}<link href="{% static 'css/style_user_profile.css' %}" rel="stylesheet" type="text/css">{% endblock %}
+{% block content %}
+    <main>
+        <article class="area">
+            <div class="header_article">
+                <div class="align_center"><h2> {{ user.username }} </h2></div>
+                <article class="flex_header">
+                    <div class="img_side">
+                        {% if user.image %}
+                            <img src="{{ user.image }}" alt="фото профиля"/>
+                        {% else %}
+                            <img src="{% static 'img/img_1.png' %}" alt="фото профиля"/>
+                        {% endif %}
+                    </div>
+                    <div class="text_side">
+                        <h3 class="red">Информация о пользователе
+                            {% if user.is_active %}
+                                <b class="green">В сети</b>
+                            {% else %}
+                                <b class="red"> Не в сети</b>
+                            {% endif %}</h3>
+                        <p class="red">Имя пользователя: {{ user.username }}</p>
+                        <p class="red">На форуме с {{ user.date_joined }}</p>
+                    </div>
+                </article>
+            </div>
+        </article>
+    </main>
+{% endblock %}

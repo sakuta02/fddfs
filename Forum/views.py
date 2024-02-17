@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CustomArticles, Genre, TagPost, News
 import locale
 from .forms import AddPostForm
 from .utils import DataMixin
+from django.contrib.auth import get_user_model
 
 locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
@@ -64,6 +65,15 @@ class ShowPost(DetailView):
     def get_object(self, queryset=None):
         return get_object_or_404(CustomArticles.published, slug=self.kwargs['slug'])
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        if self.request.user.is_authenticated:
+            context['auth'] = CustomArticles.published.filter(slug=self.kwargs['slug'], author=self.request.user).exists()
+        else:
+            context['auth'] = False
+        context['slug'] = self.kwargs['slug']
+        return context
+
 
 class AddPage(LoginRequiredMixin, CreateView):
     form_class = AddPostForm
@@ -78,12 +88,43 @@ class AddPage(LoginRequiredMixin, CreateView):
 class EditPage(UpdateView):
     model = CustomArticles
     template_name = 'add_page.html'
-    fields = ['title', 'text', 'img', 'genre', 'tag']  # Изменить этот вью!
+    form_class = AddPostForm
+
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            if CustomArticles.objects.filter(slug=self.kwargs['slug'], author=self.request.user).exists():
+                return super().get(request, *args, **kwargs)
+            else:
+                raise Http404('У вас нету доступа к редактированию данной статьи')
+        else:
+            raise Http404('У вас нету доступа к редактированию данной статьи')
 
 
 class DeletePage(DeleteView):
     template_name = 'delete_page.html'
     model = CustomArticles
-    success_url = reverse_lazy('articles', args=('vse-kategorii',))
+    success_url = reverse_lazy('articles', args=('vse-kategorii', 1))
+
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            if CustomArticles.objects.filter(slug=self.kwargs['slug'], author=self.request.user).exists():
+                return super().get(request, *args, **kwargs)
+            else:
+                raise Http404('У вас нету доступа к редактированию данной статьи')
+        else:
+            raise Http404('У вас нету доступа к редактированию данной статьи')
+
+# Профиль пользователя --------------------------------------------------
+
+
+class ShowProfile(DetailView):
+    template_name = 'user.html'
+    context_object_name = 'user'
+    model = get_user_model()
+
+    def get_object(self, queryset=None):
+        user = get_object_or_404(self.model, pk=self.kwargs['id'])
+        return user
 
 # -----------------------------------------------------------------------
+

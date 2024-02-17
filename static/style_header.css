@@ -1,0 +1,32 @@
+body {
+  font-family: Nunito, sans-serif;
+  margin: 0 10%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+header {
+  margin-top: 1%;
+  font-size: 1.2em;
+}
+
+a.styled {
+  color: crimson;
+  text-decoration: none;
+}
+
+a:hover.styled {
+  color: darkred;
+}
+
+a {
+  color: dimgrey;
+  text-decoration: none;
+}
+
+a:hover {
+  color: darkgray;
+}

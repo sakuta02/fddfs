@@ -1,28 +1,7 @@
+{% extends 'header.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>S&M</title>
-  <link rel="shortcut icon" href="{% static 'img/img.png' %}">
-  <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
-  </style>
-  <link href="{% static 'css/style_add_page.css' %}" rel="stylesheet" type="text/css">
-</head>
-<body>
-  <header>
-    <nav class="container">
-      <div><a class="styled" href="{% url 'articles' 'vse-kategorii' '1'%}">Форум</a> | <a href="{% url 'news' 1 %}" class="styled">Новости</a></div>
-      <div>S&M</div>
-          {% if user.is_authenticated %}
-            <div>{{ user.username }}</div>
-          {% else %}
-            <div><a href="{% url 'users:log_in' %}">Войти</a></div>
-          {% endif %}
-    </nav>
-    <hr>
-  </header>
+{% block style %}<link href="{% static 'css/style_add_page.css' %}" rel="stylesheet" type="text/css">{% endblock %}
+{% block content %}
   <main>
       <div class="form">
           <form method="POST" enctype="multipart/form-data">
@@ -49,5 +28,4 @@
           </form>
       </div>
   </main>
-</body>
-</html>
+{% endblock %}
