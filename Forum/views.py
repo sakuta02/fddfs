@@ -8,6 +8,7 @@ import locale
 from .forms import AddPostForm
 from .utils import DataMixin
 from django.contrib.auth import get_user_model
+from users.models import User
 
 locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
@@ -117,14 +118,29 @@ class DeletePage(DeleteView):
 # Профиль пользователя --------------------------------------------------
 
 
-class ShowProfile(DetailView):
+class ShowProfile(ListView):
     template_name = 'user.html'
-    context_object_name = 'user'
-    model = get_user_model()
+    context_object_name = 'articles'
+    model = CustomArticles
+    paginate_by = 7
 
-    def get_object(self, queryset=None):
-        user = get_object_or_404(self.model, pk=self.kwargs['id'])
-        return user
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['user'] = get_object_or_404(User, pk=self.kwargs['id'])
+        if context['user'].photo:
+            url_pic = context['user'].photo
+        else:
+            url_pic = r'../../aboba/img/profile.png'
+        context['url_pic'] = url_pic
+        return context
+
+    def get_queryset(self):
+        user = self.kwargs['id']
+        sett = CustomArticles.objects.filter(author_id=user)
+        if sett:
+            return sett
+        else:
+            return CustomArticles.objects.none()
 
 # -----------------------------------------------------------------------
 

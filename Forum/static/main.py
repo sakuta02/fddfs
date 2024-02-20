@@ -1,10 +1,6 @@
 import requests as req
 from bs4 import BeautifulSoup as Bs
 from re import match
-import sqlite3
-
-con = sqlite3.connect('../../db.sqlite3')
-cur = con.cursor()
 
 
 def func(string: str):

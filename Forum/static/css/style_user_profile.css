@@ -30,25 +30,17 @@ a.styled {
 a:hover.styled {
   color: darkred;
 }
-main {
+.main_header {
   display: flex;
   justify-content: center;
+  margin-bottom: 1em;
 }
-main > .area {
+.area {
   width: 60vw;
-  height: 80vh;
-  background-color: whitesmoke;
-  padding-left: 3em;
-  padding-right: 3em;
-  padding-top: 1em;
   border-radius: 1em;
 }
-.header_article {
-  border-radius: inherit;
-  width: 60vw;
-  background-color: lightgray;
-  padding-top: 1em;
-  padding-bottom: 3em;
+.grey {
+  background-color: whitesmoke;
 }
 .align_center {
   text-align: center;
@@ -56,28 +48,85 @@ main > .area {
 .flex_header {
   display: flex;
   padding-left: 1em;
-}
-.img_side {
-  height: 25vw;
-  width: 25vw;
-  overflow: hidden;
-  position: relative;
-  object-fit: contain;
-  margin: 1em;
-}
-.img_side img {
-  object-fit: contain;
-  width: inherit;
-  height: inherit;
   border-radius: 1em;
 }
+.img_side {
+  background-color: whitesmoke;
+  width: 13vw;
+  height: 17vw;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 1em;
+  min-height: 185px;
+  min-width: 142px;
+}
+.img_side img {
+  height: 16vw;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  min-height: 142px;
+}
+img.full_block {
+  height: 17vw;
+}
+.edit {
+  height: 1vw;
+  padding: 1em;
+  border-top: 1px solid black;
+  min-height: 25px;
+}
+.text_side_head {
+  width: 45vw;
+  margin-left: 1vw;
+  background-color: whitesmoke;
+  border-radius: 1em;
+  padding: 1em;
+  border: 1px solid black;
+}
+.text_side_head hr {
+  background-color: dimgrey;
+  margin-top: 0.8em;
+}
+.header_text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+}
+.area.second {
+  padding: 1em;
+  box-sizing: border-box;
+}
+/*Список статей*/
+.area .article img {
+  height: 110px;
+  width: 196px;
+  border-radius: 1em;
+  display: inline-block;
+}
 .text_side {
-  width: 50%
-
+  width: calc(100% - 196px - 1em)
 }
-.red {
-  color: #a41515;
+.text_side_space p{
+  margin: 0.3em;
 }
-.green {
-  color: green;
+article {
+  margin: 0.8em;
+}
+.genre {
+  color: crimson;
+}
+.genre:hover {
+  color: darkred;
+}
+.text_side p {
+  margin: 0.5em;
+}
+nav.pages {
+  display: flex;
+  justify-content: center;
+}
+.page {
+  margin: 0.1em;
+  font-size: 1.1em;
 }

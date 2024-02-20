@@ -17,7 +17,7 @@
       <div><a class="styled" href="{% url 'articles' 'vse-kategorii' '1'%}">Форум</a> | <a href="{% url 'news' 1 %}" class="styled">Новости</a></div>
       <div>S&M</div>
           {% if user.is_authenticated %}
-            <div>{{ user.username }}</div>
+              <div><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></div>
           {% else %}
             <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
           {% endif %}

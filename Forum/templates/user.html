@@ -3,29 +3,89 @@
 {% block style %}<link href="{% static 'css/style_user_profile.css' %}" rel="stylesheet" type="text/css">{% endblock %}
 {% block content %}
     <main>
-        <article class="area">
-            <div class="header_article">
-                <div class="align_center"><h2> {{ user.username }} </h2></div>
+        <article class="main_header">
+            <article class="area">
                 <article class="flex_header">
+                {% if user == request.user %}
                     <div class="img_side">
-                        {% if user.image %}
-                            <img src="{{ user.image }}" alt="фото профиля"/>
-                        {% else %}
-                            <img src="{% static 'img/img_1.png' %}" alt="фото профиля"/>
-                        {% endif %}
+                        <img src="{{ url_pic }}" alt="profile">
+                        <div class="align_center edit"><a>Редактировать</a></div>
+                {% else %}
+                    <div class="img_side">
+                        <img class="full_block" src="{{ url_pic }}" alt="profile">
+                {% endif %}
                     </div>
-                    <div class="text_side">
-                        <h3 class="red">Информация о пользователе
-                            {% if user.is_active %}
-                                <b class="green">В сети</b>
-                            {% else %}
-                                <b class="red"> Не в сети</b>
-                            {% endif %}</h3>
-                        <p class="red">Имя пользователя: {{ user.username }}</p>
-                        <p class="red">На форуме с {{ user.date_joined }}</p>
+                    <div class="text_side_head">
+                        <div class="header_text">
+                            <div class="username">{{ user.username }}</div>
+                            <div class="online">
+                                {% if user.is_active %}
+                                    В сети
+                                {% else %}
+                                    Не в сети
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr>
+                        <p>Дата регистрации: {{ user.date_joined }}</p>
+                        <p>Права администратора: {% if user.is_staff %}есть{% else %}отсутствуют{% endif %}</p>
                     </div>
                 </article>
+            </article>
+        </article>
+        <article class="main_header">
+            <article class="area second grey">
+            <h3 class="align_center">Список авторских статей</h3>
+        {% for a in articles %}
+        {% if a.img %}
+          <article class="article">
+            <div class="container">
+              <a href="{{ a.get_absolute_url }}"><img src="{% static a.img %}" alt="picture"></a>
+              <div class="text_side">
+                <p><b><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></b></p>
+                <p><a href="{{ a.genre.get_absolute_url }}" class="genre">{{ a.genre }}</a></p>
+              {% if a.tag %}
+                <p>{% for t in a.tag.all %}
+                  {% if not forloop.last %}
+                  <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a> |
+                  {% else %}
+                  <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a>
+                  {% endif %}{% endfor %}</p>
+              {% endif %}
+              </div>
             </div>
+            <hr/>
+          </article>
+        {% else %}
+        <article>
+        <div class="text_side_space">
+            <p><b><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></b></p>
+            <p><a href="{{ a.genre.get_absolute_url }}" class="genre">{{ a.genre }}</a></p>
+            <p>{% for t in a.tag.all %}
+              {% if not forloop.last %}
+              <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a> |
+              {% else %}
+              <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a>
+              {% endif %}{% endfor %}</p>
+        </div>
+        <hr>
+        </article>
+        {% endif %}
+        {% endfor %}
+          {% if page_obj.has_other_pages %}
+              <nav class="pages">
+                  {% for p in paginator.page_range %}
+                      {% if p <= page|add:4 and p >= page|add:-4 %}
+                          {% if p != page %}
+                            <a class='page' href="{% url 'articles' genre p%}">{{ p }}</a>
+                          {% else %}
+                              <div class="page"><b>{{ p }}</b></div>
+                          {% endif %}
+                      {% endif %}
+                  {% endfor %}
+              </nav>
+          {% endif %}
+            </article>
         </article>
     </main>
 {% endblock %}
