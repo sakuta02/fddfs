@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CustomArticles, Genre, TagPost, News
 import locale
-from .forms import AddPostForm
+from .forms import AddPostForm, EditProfileModel
 from .utils import DataMixin
 from django.contrib.auth import get_user_model
 from users.models import User
@@ -144,3 +144,18 @@ class ShowProfile(ListView):
 
 # -----------------------------------------------------------------------
 
+
+class EditProfile(UpdateView):
+    template_name = 'edit_profile.html'
+    model = get_user_model()
+    form_class = EditProfileModel
+
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            if get_object_or_404(get_user_model(), pk=self.kwargs['pk']) == user:
+                return super().get(request, *args, **kwargs)
+            else:
+                raise Http404('У вас нету доступа к редактированию данной страницы')
+        else:
+            raise Http404('У вас нету доступа к редактированию данной страницы')

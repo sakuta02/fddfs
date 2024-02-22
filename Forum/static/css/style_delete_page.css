@@ -1,6 +1,7 @@
 body {
   font-family: Nunito, sans-serif;
-  margin: 0 10%;
+  margin: 0;
+  background-color: black;
 }
 
 .container {
@@ -8,13 +9,8 @@ body {
   justify-content: space-around;
 }
 
-header {
-  margin-top: 1%;
-  font-size: 1.2em;
-}
-
 a {
-  color: dimgrey;
+  color: #bbbbbb;
   text-decoration: none;
 }
 
@@ -37,9 +33,10 @@ a:hover.styled {
 }
 
 button {
-  border-radius: 1em;
+  border-radius: 0.5em;
   color: dimgrey;
   padding: 0.5em;
+  font-size: 1.1em;
 }
 
 button:hover {
@@ -55,7 +52,7 @@ button:hover {
 
 form {
   width: 40vw;
-  background-color: whitesmoke;
+  background-color: #121212;
   padding: 3em;
   border-radius: 1em;
 }

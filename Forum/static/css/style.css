@@ -1,17 +1,21 @@
 body {
   font-family: 'Nunito', sans-serif;
   margin: 0;
+  background-color: black;
+  color: gainsboro;
 }
 
 a {
-  color: dimgrey;
+  color: #bbbbbb;
   text-decoration: none;
 }
 
 a:hover {
   color: darkgray;
 }
-
+hr {
+  color: #a41515;
+}
 .container {
   display: flex;
 }
@@ -43,7 +47,7 @@ main .container .vertical :last-child {
 }
 
 .area {
-  background-color: whitesmoke;
+  background-color: #121212;
   height: calc((110px + 2em) * 8 + 50px);
   width: 74%;
   border-radius: 1em;
@@ -66,7 +70,7 @@ main .container .vertical :last-child {
 
 main nav {
   text-align: left;
-  background-color: whitesmoke;
+  background-color: #121212;
   border-radius: 1em;
 }
 
@@ -102,7 +106,7 @@ nav article {
 
 footer {
   width: 99vw;
-  background-color: whitesmoke;
+  background-color: #121212;
   height: 10vh;
   margin-top: 10%;
 }

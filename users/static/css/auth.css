@@ -1,5 +1,8 @@
 body {
   font-family: Nunito, sans-serif;
+  margin: 0;
+  background-color: black;
+  color: gainsboro;
 }
 .container {
   display: flex;
@@ -15,9 +18,10 @@ header .container {
   color: darkgray;
 }
 a {
-  color: dimgrey;
+  color: #bbbbbb;
   text-decoration: none;
 }
+
 a:hover {
   color: darkgray;
 }
@@ -32,7 +36,7 @@ a.ref_main:hover {
   justify-content: center;
 }
 .form_area {
-  background-color: whitesmoke;
+  background-color: #121212;
   width: 25vw;
   border-radius: 1em;
   padding: 1em;

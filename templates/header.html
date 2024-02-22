@@ -16,8 +16,8 @@
     <nav class="container">
       <div><a class="styled" href="{% url 'articles' 'vse-kategorii' '1'%}">Форум</a> | <a href="{% url 'news' 1 %}" class="styled">Новости</a></div>
       <div>S&M</div>
-          {% if user.is_authenticated %}
-              <div><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></div>
+          {% if request.user.is_authenticated %}
+              <div><a href="{{ request.user.get_absolute_url }}">{{ request.user.username }}</a></div>
           {% else %}
             <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
           {% endif %}

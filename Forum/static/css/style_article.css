@@ -1,5 +1,7 @@
 body {
   font-family: Nunito, sans-serif;
+  background-color: black;
+  color: gainsboro;
 }
 
 .container {
@@ -17,7 +19,7 @@ header .container {
 
 .area {
   margin: 1% 10%;
-  background-color: whitesmoke;
+  background-color: #121212;
   border-radius: 1em;
   padding: 2em;
 }
@@ -45,7 +47,7 @@ li {
 }
 
 a {
-  color: dimgrey;
+  color: #bbbbbb;
   text-decoration: none;
 }
 

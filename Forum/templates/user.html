@@ -9,12 +9,13 @@
                 {% if user == request.user %}
                     <div class="img_side">
                         <img src="{{ url_pic }}" alt="profile">
-                        <div class="align_center edit"><a>Редактировать</a></div>
-                {% else %}
-                    <div class="img_side">
-                        <img class="full_block" src="{{ url_pic }}" alt="profile">
-                {% endif %}
+                        <div class="align_center edit"><a href="{% url 'edit_profile' user.pk %}">Редактировать</a></div>
                     </div>
+                {% else %}
+                    <div class="full_img_side">
+                        <img class="full_block" src="{{ url_pic }}" alt="profile">
+                    </div>
+                {% endif %}
                     <div class="text_side_head">
                         <div class="header_text">
                             <div class="username">{{ user.username }}</div>
