@@ -1,0 +1,39 @@
+{% extends 'base_articles.html' %}
+{% load static %}
+{% block article %}
+    {% load article_tags %}
+    <article class="area">
+        {% autoescape off %}
+            <div class="article">
+                <div id="id_header_article">
+                    <h1>{{ p.title }}</h1>
+                </div>
+                {{ p.text|linebreaks }}
+                <p>Автор статьи: <a
+                        href="{{ p.author.get_absolute_url }}"><b>{{ p.author.username|default:"Не известен" }}</b></a>
+                </p>
+                <p>Дата и время публикации: <b>{{ p.created_at }}</b></p>
+                <p>Жанр: <a href="{{ p.genre.get_absolute_url }}" id="id_tag">{{ p.genre }}</a></p>
+            </div>
+            <p>Тэги: {% for t in p.tag.all %}
+                {% if not forloop.last %}
+                    <a href="{% url 'articles' 'vse-kategorii' '1' %}?tag={{ t.slug }}" class="tag">{{ t.tag }}</a> |
+                {% else %}
+                    <a href="{% url 'articles' 'vse-kategorii' '1' %}?tag={{ t.slug }}" class="tag">{{ t.tag }}</a>
+                {% endif %}
+            {% endfor %}
+            </p>
+            {% if auth %}
+                <p>
+                    <a href="{% url 'edit_page' slug %}">Редактировать</a>
+                </p>
+            {% endif %}
+            {% if auth %}
+                <p>
+                    <a href="{% url 'delete_page' slug %}">Удалить пост</a>
+                </p>
+            {% endif %}
+
+        {% endautoescape %}
+    </article>
+{% endblock %}

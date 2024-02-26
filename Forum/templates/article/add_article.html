@@ -1,0 +1,40 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block style %}
+    <link href="{% static 'css/article/add_article.css' %}" rel="stylesheet" type="text/css">{% endblock %}
+{% block content %}
+    <main>
+        <div class="form">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p class="form-row"><label for="{{ form.title.id_for_label }}"> {{ form.title.label }} напишите пару слов, чтобы привлечь читателя</label></p>
+                <p>{{ form.title }}</p>
+                <p class="err"> {{ form.title.errors }} </p>
+                <p class="form-row"><label for="{{ form.text.id_for_label }}"> {{ form.text.label }} в тексте не приветствуются маты и оскорбления</label></p>
+                <p>{{ form.text }}</p>
+                <p class="err"> {{ form.text.errors }} </p>
+                <div class="container genres_flex">
+                    <article class="genres_in_flex">
+                        <p class="form-row"><label for="{{ form.tag.id_for_label }}"> {{ form.tag.label }} </label></p>
+                        <p>{{ form.tag }}</p>
+                        <p class="err"> {{ form.tag.errors }} </p>
+                    </article>
+                    <article class="genres_in_flex">
+                        <p class="form-row"><label for="{{ form.genre.id_for_label }}"> {{ form.genre.label }} </label>
+                        </p>
+                        <p>{{ form.genre }}</p>
+                        <p class="err"> {{ form.genre.errors }} </p>
+                    </article>
+                    <article class="genres_in_flex">
+                        <p class="form-row"><label for="{{ form.img.id_for_label }}"> {{ form.img.label }} </label></p>
+                        <div class="img_wrapper">{{ form.img }}</div>
+                        <p class="err"> {{ form.img.errors }} </p>
+                    </article>
+                </div>
+                <p>
+                    <button type="submit"><b>Отправить</b></button>
+                    {{ form.non_field_errors }}</p>
+            </form>
+        </div>
+    </main>
+{% endblock %}

@@ -22,7 +22,7 @@ for i in range(1, 6):
         data = element.find('a', class_='_title_11mk8_60')
         title = data.get_text()
         src = url_news + data['href']
-        img_src = element.find('img')['src']
+        img_src = element.find('images')['src']
         # obj = News(title=title, img_src=img_src, ref=src)
         # obj.save()
 

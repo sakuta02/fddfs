@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255, verbose_name='Название')),
                 ('slug', models.SlugField(blank=True, max_length=255, unique=True, verbose_name='слаг')),
-                ('img', models.ImageField(blank=True, upload_to='custom_photos/%Y/%m', verbose_name='фото')),
+                ('images', models.ImageField(blank=True, upload_to='custom_photos/%Y/%m', verbose_name='фото')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
                 ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Дата обновления')),
                 ('is_published', models.BooleanField(choices=[(False, 'Нет'), (True, 'Да')], default=1, verbose_name='Опубликовано')),

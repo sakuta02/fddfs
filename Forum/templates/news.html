@@ -3,82 +3,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>S&M</title>
-  <link rel="shortcut icon" href="{% static 'img/img.png' %}">
-  <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
-  <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
-  </style>
+    <meta charset="UTF-8">
+    <title>S&M</title>
+    <link rel="shortcut icon" href="{% static 'images/img.png' %}">
+    <link href="{% static 'css/news.css' %}" rel="stylesheet" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+    </style>
 </head>
 <body>
-  <header>
+<header>
     <nav>
-      <div class="container">
-        <div><a href="{% url 'articles' 'vse-kategorii' '1'%}" class="navig">Форум</a> | <div class="selected news">Новости</div></div>
-        <div>S&M</div>
-          {% if user.is_authenticated %}
-              <div><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></div>
-          {% else %}
-            <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
-          {% endif %}
-      </div>
+        <div class="container">
+            <div><a href="{% url 'articles' 'vse-kategorii' '1' %}" class="navig">Форум</a> |
+                <div class="selected news">Новости</div>
+            </div>
+            <div>S&M</div>
+            {% if user.is_authenticated %}
+                <div><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></div>
+            {% else %}
+                <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
+            {% endif %}
+        </div>
     </nav>
     <hr>
-  </header>
-  <main>
+</header>
+<main>
     <div class="container">
-      <div class="area">
-        {% for n in news %}
-          <article>
-            <div class="container">
-              <a href="{{ n.ref }}"><img src="{{ n.img_src }}" alt="picture"></a>
-              <div class="text_side">
-                <b><a href="{{ n.ref }}"><p>{{ n.title }}</p></a></b>
-                <p class="genre">Made by StopGame</p>
-              </div>
-            </div>
-            <hr>
-          </article>
-        {% endfor %}
-          {% if page_obj.has_other_pages %}
-          <nav class="pages">
-              {% for p in paginator.page_range %}
-                  {% if p <= page|add:4 and p >= page|add:-4 %}
-                      {% if p != page %}
-                         <a class='page' href="{% url 'news' p %}"> {{ p }} </a>
-                      {% else %}
-                          <div class="page"><b> {{ p }} </b></div>
-                      {% endif %}
-                  {% endif %}
-              {% endfor %}
-          </nav>
-          {% endif %}
-      </div>
+        <div class="area">
+            {% for n in news %}
+                <article>
+                    <div class="container">
+                        <a href="{{ n.ref }}"><img src="{{ n.img_src }}" alt="picture"></a>
+                        <div class="text_side">
+                            <b><a href="{{ n.ref }}"><p>{{ n.title }}</p></a></b>
+                            <p class="genre">Made by StopGame</p>
+                        </div>
+                    </div>
+                    <hr>
+                </article>
+            {% endfor %}
+            {% if page_obj.has_other_pages %}
+                <nav class="pages">
+                    {% for p in paginator.page_range %}
+                        {% if p <= page|add:4 and p >= page|add:-4 %}
+                            {% if p != page %}
+                                <a class='page' href="{% url 'news' p %}"> {{ p }} </a>
+                            {% else %}
+                                <div class="page"><b> {{ p }} </b></div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </nav>
+            {% endif %}
+        </div>
         <div class="container vertical">
-          <nav>
-            <img src="{% static 'img/StopGame_logo.svg.png' %}" alt="stopgame_logo"/>
-            <article>
-              <p>StopGame.ru (или просто StopGame) — российский игровой интернет-портал. Один из первых российских сайтов, на постоянной основе запустивших игровые стримы. Сайт также известен документальными сериалами о компьютерных играх, публикующихся на официальном YouTube-канале.</p>
-              <p>Именно с этого сайта копируются посты в новостной колонке</p>
-              <p><a href="https://stopgame.ru/">Оффициальный сайт</a></p>
-              <p><a href="https://youtube.com/channel/UCq7JZ8ATgQWeu6sDM1czjhg">Ютуб канал</a> </p>
-            </article>
-          </nav>
-          <nav>
-            <article>
-              <h1>S&M - форум об играх и не только.</h1>
-                <p><b>Здесь могла быть ваша реклама</b>. Для технической поддержки, сотрудничества, рекламы или баг-репорта писать на почту: <b>savam.0510@gmail.com</b></p>
-            </article>
-          </nav>
+            <nav>
+                <img src="{% static 'images/StopGame_logo.svg.png' %}" alt="stopgame_logo"/>
+                <article>
+                    <p>StopGame.ru (или просто StopGame) — российский игровой интернет-портал. Один из первых российских
+                        сайтов, на постоянной основе запустивших игровые стримы. Сайт также известен документальными
+                        сериалами о компьютерных играх, публикующихся на официальном YouTube-канале.</p>
+                    <p>Именно с этого сайта копируются посты в новостной колонке</p>
+                    <p><a href="https://stopgame.ru/">Оффициальный сайт</a></p>
+                    <p><a href="https://youtube.com/channel/UCq7JZ8ATgQWeu6sDM1czjhg">Ютуб канал</a></p>
+                </article>
+            </nav>
+            <nav>
+                <article>
+                    <h1>S&M - форум об играх и не только.</h1>
+                    <p><b>Здесь могла быть ваша реклама</b>. Для технической поддержки, сотрудничества, рекламы или
+                        баг-репорта писать на почту: <b>savam.0510@gmail.com</b></p>
+                </article>
+            </nav>
         </div>
     </div>
-  </main>
-  <footer>
+</main>
+<footer>
     <div class="container">
-      <div><p>Копирование информации и ее распространение на других сайтах <b>СТРОГО ЗАПРЕЩЕНО!</b> </p></div>
-      <div><p>Для связи: <a href="https://github.com/sakuta02" class="git">GitHub</a> | gmail: <b>savam.0510@gmail.com</b></p></div>
+        <div><p>Копирование информации и ее распространение на других сайтах <b>СТРОГО ЗАПРЕЩЕНО!</b></p></div>
+        <div><p>Для связи: <a href="https://github.com/sakuta02" class="git">GitHub</a> | gmail:
+            <b>savam.0510@gmail.com</b></p></div>
     </div>
-  </footer>
+</footer>
 </body>
 </html>

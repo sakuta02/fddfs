@@ -1,0 +1,29 @@
+.area {
+    display: flex;
+    justify-content: center;
+}
+.main_form {
+    background-color: #121212;
+    width: 25vw;
+    height: 60vh;
+    border-radius: 1em;
+    padding: 3em;
+}
+label {
+    font-size: 1.3em;
+}
+.form-row {
+        margin-top: 2em;
+}
+input[type='text'], input[type='email'] {
+    width: 10vw;
+    height: 2.5vh;
+    padding: 0.2em;
+}
+button {
+    margin-top: 2em;
+    width: 10vw;
+    height: 2.5vh;
+}
+#id_photo {
+}

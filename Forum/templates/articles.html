@@ -3,111 +3,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>S&M</title>
-  <link rel="shortcut icon" href="{% static 'img/img.png' %}">
-  <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
-  </style>
-  <link href="{% static 'css/style_articles.css' %}" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>S&M</title>
+    <link rel="shortcut icon" href="{% static 'images/img.png' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+    </style>
+    <link href="{% static 'css/articles.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <header>
+<header>
     <nav>
-      <div class="container">
-        <div><div class="selected_forum">Форум</div> <div class="inline">| <a href="{% url 'news' 1 %}" class="news">Новости</a></div></div>
-        <div>S&M</div>
-          {% if user.is_authenticated %}
-              <div><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></div>
-          {% else %}
-            <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
-          {% endif %}
-      </div>
+        <div class="container">
+            <div>
+                <div class="selected_forum">Форум</div>
+                <div class="inline">| <a href="{% url 'news' 1 %}" class="news">Новости</a></div>
+            </div>
+            <div>S&M</div>
+            {% if user.is_authenticated %}
+                <div><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></div>
+            {% else %}
+                <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
+            {% endif %}
+        </div>
     </nav>
     <hr>
-  </header>
-  <main>
+</header>
+<main>
     <div class="container">
         <div class="genres">
-          <h2>Поиск</h2>
-          <p>Список категорий</p>
-          <ul>
-            {% genres as genres %}
-            {% for g in genres %}
-              {% if g.slug == genre %}
-                  <li><a href="{{ g.get_absolute_url }}" class="selected">{{ g.name }}</a></li>
-              {% else %}
-                  <li><a href="{{ g.get_absolute_url }}">{{ g.name }}</a></li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        <p>Список тэгов</p>
-          <div class="tags">
-              {% tags as tags %}
-              {% for t in tags %}
-                {% if t.slug == tag %}
-                  <div class="block selected">{{ t.tag }}</div>
-                {% else %}
-                  <a href="?tag={{ t.slug }}"><div class="block">{{ t.tag }}</div></a>
-                {% endif %}
-              {% endfor %}
-          </div>
+            <h2>Фильтр статей</h2>
+            <form method="get" id="id_form">
+                <p class="align_center"><label for="id_1">Поиск</label></p>
+                <p><input id='id_1' type="search" name="search"></p>
+                <p class="center">
+                    <button type="submit">Найти</button>
+                </p>
+            </form>
+            <p>Фильтр по категориям</p>
+            <ul>
+                {% genres as genres %}
+                {% for g in genres %}
+                    {% if g.slug == genre %}
+                        <li><a href="{{ g.get_absolute_url }}" class="selected">{{ g.name }}</a></li>
+                    {% else %}
+                        <li><a href="{{ g.get_absolute_url }}">{{ g.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <h3>Поиск по тегам</h3>
+            <div class="tags">
+                {% tags as tags %}
+                {% for t in tags %}
+                    {% if t.slug == tag %}
+                        <div class="block selected">{{ t.tag }}</div>
+                    {% else %}
+                        {% if request.GET and not tag %}
+                            <a href="{{ request.get_full_path }}&tag={{ t.slug }}">
+                                <div class="block">{{ t.tag }}</div>
+                            </a>
+                        {% else %}
+                            <a href="?tag={{ t.slug }}">
+                                <div class="block">{{ t.tag }}</div>
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
             <p class="add_page"><a href="{% url 'add_page' %}">Добавить свою статью</a></p>
         </div>
-      <div class="area">
-        {% for a in articles %}
-        {% if a.img %}
-          <article>
-            <div class="container">
-              <a href="{{ a.get_absolute_url }}"><img src="{% static a.img %}" alt="picture"></a>
-              <div class="text_side">
-                <p><b><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></b></p>
-                <p><a href="{{ a.genre.get_absolute_url }}" class="genre">{{ a.genre }}</a></p>
-              {% if a.tag %}
-                <p>{% for t in a.tag.all %}
-                  {% if not forloop.last %}
-                  <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a> |
-                  {% else %}
-                  <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a>
-                  {% endif %}{% endfor %}</p>
-              {% endif %}
-              </div>
-            </div>
-            <hr/>
-          </article>
-        {% else %}
-        <article>
-        <div class="text_side_space">
-            <p><b><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></b></p>
-            <p><a href="{{ a.genre.get_absolute_url }}" class="genre">{{ a.genre }}</a></p>
-            <p>{% for t in a.tag.all %}
-              {% if not forloop.last %}
-              <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a> |
-              {% else %}
-              <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a>
-              {% endif %}{% endfor %}</p>
+        <div class="area">
+            {% for a in articles %}
+                {% if a.img %}
+                    <article>
+                        <div class="container">
+                            <a href="{{ a.get_absolute_url }}"><img src="{% static a.img %}" alt="picture"></a>
+                            <div class="text_side">
+                                <p><b><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></b></p>
+                                <p><a href="{{ a.genre.get_absolute_url }}" class="genre">{{ a.genre }}</a></p>
+                                {% if a.tag %}
+                                    <p>{% for t in a.tag.all %}
+                                        {% if not forloop.last %}
+                                            <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a> |
+                                        {% else %}
+                                            <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a>
+                                        {% endif %}{% endfor %}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr/>
+                    </article>
+                {% else %}
+                    <article>
+                        <div class="text_side_space">
+                            <p><b><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></b></p>
+                            <p><a href="{{ a.genre.get_absolute_url }}" class="genre">{{ a.genre }}</a></p>
+                            <p>{% for t in a.tag.all %}
+                                {% if not forloop.last %}
+                                    <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a> |
+                                {% else %}
+                                    <a href="?tag={{ t.slug }}" class="genre">{{ t.tag }}</a>
+                                {% endif %}{% endfor %}</p>
+                        </div>
+                        <hr>
+                    </article>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_other_pages %}
+                <nav class="pages">
+                    {% for p in paginator.page_range %}
+                        {% if p <= page|add:4 and p >= page|add:-4 %}
+                            {% if p != page %}
+                                <a class='page' href="{% url 'articles' genre p %}">{{ p }}</a>
+                            {% else %}
+                                <div class="page"><b>{{ p }}</b></div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </nav>
+            {% endif %}
         </div>
-        <hr>
-        </article>
-        {% endif %}
-        {% endfor %}
-          {% if page_obj.has_other_pages %}
-              <nav class="pages">
-                  {% for p in paginator.page_range %}
-                      {% if p <= page|add:4 and p >= page|add:-4 %}
-                          {% if p != page %}
-                            <a class='page' href="{% url 'articles' genre p%}">{{ p }}</a>
-                          {% else %}
-                              <div class="page"><b>{{ p }}</b></div>
-                          {% endif %}
-                      {% endif %}
-                  {% endfor %}
-              </nav>
-          {% endif %}
-      </div>
     </div>
-  </main>
-  <footer>
-  </footer>
+</main>
+<footer>
+</footer>
 </body>
 </html>

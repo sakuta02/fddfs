@@ -6,27 +6,28 @@
     <title>S&M</title>
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
     </style>
 </head>
 <body>
-    <header>
+<header>
     <nav>
-      <div class="container">
-        <div><a class="ref_main" href="{% url 'articles' 'vse-kategorii' '1' %}">Форум</a> | <a href="{% url 'news' 1 %}" class="ref_main">Новости</a></div>
-        <div>S&M</div>
-        <div class="low_colored">Выполняется вход...</div>
-      </div>
+        <div class="container">
+            <div><a class="ref_main" href="{% url 'articles' 'vse-kategorii' '1' %}">Форум</a> | <a
+                    href="{% url 'news' 1 %}" class="ref_main">Новости</a></div>
+            <div>S&M</div>
+            <div class="low_colored">Выполняется вход...</div>
+        </div>
     </nav>
     <hr>
-    </header>
-    <main>
-        <article class="container area">
-            <div class="form_area">
-                {% block form %}{% endblock %}
-            </div>
-        </article>
-    </main>
+</header>
+<main>
+    <article class="container area">
+        <div class="form_area">
+            {% block form %}{% endblock %}
+        </div>
+    </article>
+</main>
 
 </body>
 </html>

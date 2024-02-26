@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth import get_user_model
 
 
@@ -36,3 +36,9 @@ class RegisterForm(UserCreationForm):
         if get_user_model().objects.filter(email=email).exists():
             raise forms.ValidationError("Пользователь с таким адресом уже существует")
         return email
+
+
+class PasswordChangeCustomForm(PasswordChangeForm):
+    old_password = forms.CharField(label='Старый пароль')
+    new_password1 = forms.CharField(label="Новый пароль")
+    new_password2 = forms.CharField(label="Повторите пароль")

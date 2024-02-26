@@ -1,0 +1,60 @@
+body {
+    font-family: Nunito, sans-serif;
+    margin: 0;
+    background-color: black;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+a {
+    color: #bbbbbb;
+    text-decoration: none;
+}
+
+a:hover {
+    color: darkgray;
+}
+
+a.styled {
+    color: crimson;
+    text-decoration: none;
+}
+
+a:hover.styled {
+    color: darkred;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    border-radius: 0.3em;
+    color: black;
+    padding: 0.5em;
+    font-size: 1em;
+    width: 100%;
+    transition: background-color 1s;
+}
+
+button:hover {
+    background-color: whitesmoke;
+}
+
+.errorlist li {
+    color: red;
+    font-weight: bold;
+    margin: 0;
+    list-style: none outside none;
+}
+
+form {
+    width: 20vw;
+    background-color: #121212;
+    padding: 2em;
+    border-radius: 1em;
+}
