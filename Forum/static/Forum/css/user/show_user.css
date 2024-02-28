@@ -76,11 +76,11 @@ a:hover.styled {
   min-width: 142px;
 }
 img.full_block {
-  height: 13vw;
+  height: 14vw;
 }
 .edit {
   height: 1vw;
-  padding: 1em;
+  padding: 0.5em;
   border-top: 1px solid black;
   min-height: 25px;
 }
