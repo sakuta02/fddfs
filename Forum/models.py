@@ -45,6 +45,8 @@ class CustomArticles(models.Model):
     visits = models.IntegerField(default=0, verbose_name='Посещения')
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='posts', null=True, blank=True, verbose_name='Автор поста')
 
+
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save()
@@ -59,6 +61,16 @@ class CustomArticles(models.Model):
     class Meta:
         verbose_name = 'Пользовательские статьи'
         verbose_name_plural = 'Пользовательские статьи'
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='comments', null=True, blank=False, verbose_name='Автор')
+    text = models.TextField(verbose_name='Комментарий')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата написания комментария')
+    post = models.ForeignKey('CustomArticles', on_delete=models.CASCADE, related_name='comments', verbose_name='Пост')
+
+    def get_absolute_url(self):
+        return reverse('article', kwargs={'slug': self.post.slug})
 
 
 class Genre(models.Model):

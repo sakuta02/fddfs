@@ -5,6 +5,7 @@
 .main_form {
     background-color: #121212;
     width: 25vw;
+    min-width: 600px;
     height: 60vh;
     border-radius: 1em;
     padding: 3em;
@@ -17,10 +18,12 @@ label {
 }
 input[type='text'], input[type='email'] {
     width: 10vw;
+    min-width: 300px;
     height: 2.5vh;
     padding: 0.2em;
 }
 button {
+    min-width: 300px;
     margin-top: 2em;
     width: 10vw;
     height: 2.5vh;

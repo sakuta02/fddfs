@@ -1,6 +1,6 @@
 from django import forms
 from slugify import slugify
-from .models import CustomArticles, Genre, TagPost
+from .models import CustomArticles, Genre, TagPost, Comment
 from django.contrib.auth import get_user_model
 
 
@@ -30,3 +30,11 @@ class EditProfileModel(forms.ModelForm):
         fields = ('username', 'email', 'photo')
         labels = {'username': 'Имя пользователя - логин аккаунта', 'email': 'Электронная почта',
                   'photo': 'Фото профиля'}
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text', )
+        labels = {'text': 'Ваш комментарий'}
+

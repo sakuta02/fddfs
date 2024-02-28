@@ -65,3 +65,35 @@ a.ref_main:hover {
 #id_tag:hover {
     color: darkred;
 }
+.form {
+    margin: 1% 10%;
+    background-color: #121212;
+    border-radius: 1em;
+    padding: 2em;
+}
+#id_text {
+    width: 100%;
+    border-radius: 0.5em;
+    font-size: 1.2em;
+    padding: 0.5em;
+}
+button {
+    font-size: 1em;
+    padding: 0.2em;
+    border-radius: 0.3em;
+    transition: background-color 1s;
+}
+button:hover {
+    background-color: #bbbbbb;
+}
+#id_comments {
+    display: flex;
+    flex-direction: column;
+}
+.comment {
+    background-color: black;
+    margin-top: 1em;
+    min-height: 3em;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}

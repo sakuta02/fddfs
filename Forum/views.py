@@ -3,9 +3,9 @@ from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import CustomArticles, Genre, TagPost, News
+from .models import CustomArticles, Genre, TagPost, News, Comment
 import locale
-from .forms import AddPostForm, EditProfileModel
+from .forms import AddPostForm, EditProfileModel, CommentForm
 from .utils import DataMixin
 from django.contrib.auth import get_user_model
 from users.models import User
@@ -64,12 +64,9 @@ class Articles(DataMixin, ListView):
 
 # Работа с кастомными записями ------------------------------------------
 
-class ShowPost(DetailView):
+class ShowPost(LoginRequiredMixin, CreateView):
     template_name = 'article/show_article.html'
-    context_object_name = 'p'
-
-    def get_object(self, queryset=None):
-        return get_object_or_404(CustomArticles.published, slug=self.kwargs['slug'])
+    form_class = CommentForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -79,7 +76,16 @@ class ShowPost(DetailView):
         else:
             context['auth'] = False
         context['slug'] = self.kwargs['slug']
+        post = get_object_or_404(CustomArticles.published, slug=self.kwargs['slug'])
+        context['p'] = post
+        context['comments'] = Comment.objects.filter(post=post)
         return context
+
+    def form_valid(self, form):
+        article = form.save(commit=False)
+        article.author = self.request.user
+        article.post = get_object_or_404(CustomArticles, slug=self.kwargs['slug'])
+        return super().form_valid(form)
 
 
 class AddPage(LoginRequiredMixin, CreateView):
@@ -87,7 +93,7 @@ class AddPage(LoginRequiredMixin, CreateView):
     template_name = 'article/add_article.html'
 
     def form_valid(self, form):
-        article = form.save(commit=False)  # Добавить валидатор для слага
+        article = form.save(commit=False)
         article.author = self.request.user
         return super().form_valid(form)
 
