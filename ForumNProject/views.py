@@ -4,5 +4,4 @@ from django.urls import reverse
 
 
 def main_url(request):
-    return HttpResponseRedirect(redirect_to=reverse('news', args=(1, )))
-
+    return HttpResponseRedirect(redirect_to=reverse('news', args=(1,)))

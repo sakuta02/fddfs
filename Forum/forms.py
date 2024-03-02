@@ -4,7 +4,7 @@ from .models import CustomArticles, Genre, TagPost, Comment
 from django.contrib.auth import get_user_model
 
 
-class AddPostForm(forms.ModelForm):
+class EditForm(forms.ModelForm):
     genre = forms.ModelChoiceField(queryset=Genre.objects.exclude(slug='vse-kategorii'), label='Выбор жанра статьи',
                                    empty_label=None)
     tag = forms.ModelMultipleChoiceField(queryset=TagPost.objects.all(), label='Доступные тэги')
@@ -17,6 +17,9 @@ class AddPostForm(forms.ModelForm):
                    'text': forms.Textarea(attrs={'class': 'art_content'})}
         labels = {'title': 'Заголовок статьи:', 'text': 'Содержание статьи:',
                   'img': 'Вы можете загрузить фотографию к посту'}
+
+
+class AddPostForm(EditForm):
 
     def clean_title(self):
         if CustomArticles.objects.filter(slug=slugify(self.cleaned_data['title'])).exists():
@@ -38,6 +41,5 @@ class EditProfileModel(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('text', )
+        fields = ('text',)
         labels = {'text': 'Ваш комментарий'}
-

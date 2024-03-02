@@ -1,11 +1,11 @@
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CustomArticles, Genre, TagPost, News, Comment
 import locale
-from .forms import AddPostForm, EditProfileModel, CommentForm
+from .forms import AddPostForm, EditProfileModel, CommentForm, EditForm
 from .utils import DataMixin
 from django.contrib.auth import get_user_model
 from users.models import User
@@ -101,7 +101,7 @@ class AddPage(LoginRequiredMixin, CreateView):
 class EditPage(UpdateView):
     model = CustomArticles
     template_name = 'article/add_article.html'
-    form_class = AddPostForm
+    form_class = EditForm
 
     def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:

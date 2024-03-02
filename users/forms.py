@@ -4,17 +4,22 @@ from django.contrib.auth import get_user_model
 
 
 class LogInForm(AuthenticationForm):
-    username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={'class': 'username-field', 'placeholder': 'Логин'}))
-    password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={'class': 'password-field', 'placeholder': 'Пароль'}))
+    username = forms.CharField(label="Логин",
+                               widget=forms.TextInput(attrs={'class': 'username-field', 'placeholder': 'Логин'}))
+    password = forms.CharField(label="Пароль",
+                               widget=forms.PasswordInput(attrs={'class': 'password-field', 'placeholder': 'Пароль'}))
 
     class Meta:
         model = get_user_model()
 
 
 class RegisterForm(UserCreationForm):
-    username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={'class': 'username-field', 'placeholder': 'Логин'}))
-    password1 = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={'class': 'password-field', 'placeholder': 'Придумайте надежный пароль'}))
-    password2 = forms.CharField(label="Подтверждение пароля", widget=forms.PasswordInput(attrs={'class': 'password-field', 'placeholder': 'Повторите пароль'}))
+    username = forms.CharField(label="Логин",
+                               widget=forms.TextInput(attrs={'class': 'username-field', 'placeholder': 'Логин'}))
+    password1 = forms.CharField(label="Пароль", widget=forms.PasswordInput(
+        attrs={'class': 'password-field', 'placeholder': 'Придумайте надежный пароль'}))
+    password2 = forms.CharField(label="Подтверждение пароля", widget=forms.PasswordInput(
+        attrs={'class': 'password-field', 'placeholder': 'Повторите пароль'}))
 
     class Meta:
         model = get_user_model()

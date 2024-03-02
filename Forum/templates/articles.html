@@ -79,7 +79,8 @@
                         <div class="container">
                             <a href="{{ a.get_absolute_url }}"><img src="{% static a.img %}" alt="picture"></a>
                             <div class="text_side">
-                                <p><b><a href="{{ a.get_absolute_url }}?next={{ a.get_absolute_url }}">{{ a.title }}</a></b></p>
+                                <p><b><a href="{{ a.get_absolute_url }}?next={{ a.get_absolute_url }}">{{ a.title }}</a></b>
+                                </p>
                                 <p><a href="{{ a.genre.get_absolute_url }}" class="genre">{{ a.genre }}</a></p>
                                 {% if a.tag %}
                                     <p>{% for t in a.tag.all %}

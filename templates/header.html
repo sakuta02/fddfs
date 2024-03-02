@@ -2,28 +2,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>S&M</title>
-  <link rel="shortcut icon" href="{% static 'forum/images/img.png' %}">
-  <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
-  </style>
-  <link href="{% static 'base_templates/header.css' %}" rel="stylesheet" type="text/css">
-  {% block style %}{% endblock %}
+    <meta charset="UTF-8">
+    <title>S&M</title>
+    <link rel="shortcut icon" href="{% static 'forum/images/img.png' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+    </style>
+    <link href="{% static 'BASED/base_templates/css/header/header.css' %}" rel="stylesheet" type="text/css">
+    {% block style %}{% endblock %}
 </head>
 <body>
-  <header>
+<header>
     <nav class="container">
-      <div><a class="styled" href="{% url 'articles' 'vse-kategorii' '1'%}">Форум</a> | <a href="{% url 'news' 1 %}" class="styled">Новости</a></div>
-      <div>S&M</div>
-          {% if request.user.is_authenticated %}
-              <div><a href="{{ request.user.get_absolute_url }}">{{ request.user.username }}</a></div>
-          {% else %}
+        <div><a class="styled" href="{% url 'articles' 'vse-kategorii' '1' %}">Форум</a> | <a href="{% url 'news' 1 %}"
+                                                                                              class="styled">Новости</a>
+        </div>
+        <div>S&M</div>
+        {% if request.user.is_authenticated %}
+            <div><a href="{{ request.user.get_absolute_url }}">{{ request.user.username }}</a></div>
+        {% else %}
             <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
-          {% endif %}
+        {% endif %}
     </nav>
     <hr>
-  </header>
-    {% block content %}{% endblock %}
+</header>
+{% block content %}{% endblock %}
 </body>
 </html>

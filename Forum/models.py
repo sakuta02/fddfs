@@ -13,8 +13,6 @@ class News(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')
     ref = models.TextField(verbose_name='Ссылка на оригинал')
     img_src = models.TextField(verbose_name='Ссылка на изображение')
-    created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Дата создания')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     published = PManager()
     objects = models.Manager()
@@ -31,21 +29,22 @@ class CustomArticles(models.Model):
     class Status(models.IntegerChoices):
         DRAFT = (0, 'Нет')
         PUBLISHED = (1, 'Да')
+
     title = models.CharField(max_length=255, verbose_name='Название')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, blank=True, verbose_name='слаг')
     img = models.ImageField(verbose_name='фото', upload_to='custom_photos/%Y/%m', blank=True)
     genre = models.ForeignKey('Genre', on_delete=models.PROTECT, null=True, verbose_name='Жанр')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
-    is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)), default=Status.PUBLISHED, verbose_name='Опубликовано')
+    is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)),
+                                       default=Status.PUBLISHED, verbose_name='Опубликовано')
     text = models.TextField(verbose_name='Текст статьи')
     published = PManager()
     objects = models.Manager()
     tag = models.ManyToManyField(to='TagPost', blank=True, related_name='tags', verbose_name='Тэги')
     visits = models.IntegerField(default=0, verbose_name='Посещения')
-    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='posts', null=True, blank=True, verbose_name='Автор поста')
-
-
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='posts', null=True, blank=True,
+                               verbose_name='Автор поста')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -64,7 +63,8 @@ class CustomArticles(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='comments', null=True, blank=False, verbose_name='Автор')
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='comments', null=True,
+                               blank=False, verbose_name='Автор')
     text = models.TextField(verbose_name='Комментарий')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата написания комментария')
     post = models.ForeignKey('CustomArticles', on_delete=models.CASCADE, related_name='comments', verbose_name='Пост')

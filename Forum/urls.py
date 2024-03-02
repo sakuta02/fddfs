@@ -12,4 +12,3 @@ urlpatterns = [
     path('profile/<int:id>', ShowProfile.as_view(), name='profile'),
     path('profile/edit/<int:pk>', EditProfile.as_view(), name='edit_profile')
 ]
-

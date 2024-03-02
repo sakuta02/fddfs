@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('forum/', include('Forum.urls')),
     path('', main_url, name="main_url"),
-    path('account/',  include('users.urls', namespace='users')),
+    path('account/', include('users.urls', namespace='users')),
     path("__debug__/", include("debug_toolbar.urls"))
 ]
 

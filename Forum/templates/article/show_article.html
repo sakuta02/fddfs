@@ -38,15 +38,16 @@
         <form method="post">
             {% csrf_token %}
             {{ form.non_field_errors }}
-            <label for="{{ form.text.is_for_label }}">{{ form.text.label }}</label><p>{{ form.text }}</p>
+            <label for="{{ form.text.is_for_label }}">{{ form.text.label }}</label>
+            <p>{{ form.text }}</p>
             {{ form.text.errors }}
             <button type="submit">Опубликовать</button>
             <div id="id_comments">
                 {% for c in comments %}
-                <div class="comment">
-                    <p>{{ c.text }}</p>
-                    <p> By <a href="{{ c.author.get_absolute_url }}">{{ c.author.username }}</a></p>
-                </div>
+                    <div class="comment">
+                        <p>{{ c.text }}</p>
+                        <p> By <a href="{{ c.author.get_absolute_url }}">{{ c.author.username }}</a></p>
+                    </div>
                 {% endfor %}
             </div>
         </form>

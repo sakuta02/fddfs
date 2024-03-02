@@ -2,35 +2,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>S&M</title>
-  <link rel="shortcut icon" href="{% static 'Forum/images/img.png' %}">
-  <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
-  </style>
-  <link href="{% static 'Forum/css/article/show_article.css' %}" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>S&M</title>
+    <link rel="shortcut icon" href="{% static 'Forum/images/img.png' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+    </style>
+    <link href="{% static 'Forum/css/article/show_article.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <header>
+<header>
     <nav>
-      <div class="container">
-        <div><a class="ref_main" href="{% url 'articles' 'vse-kategorii' '1' %}">Форум</a> | <a href="{% url 'news' 1 %}" class="ref_main">Новости</a></div>
-        <div>S&M</div>
-          {% if user.is_authenticated %}
-              <div><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></div>
-          {% else %}
-            <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
-          {% endif %}
-      </div>
+        <div class="container">
+            <div><a class="ref_main" href="{% url 'articles' 'vse-kategorii' '1' %}">Форум</a> | <a
+                    href="{% url 'news' 1 %}" class="ref_main">Новости</a></div>
+            <div>S&M</div>
+            {% if user.is_authenticated %}
+                <div><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></div>
+            {% else %}
+                <div><a href="{% url 'users:log_in' %}?next={{ request.path }}">Войти</a></div>
+            {% endif %}
+        </div>
     </nav>
     <hr>
-  </header>
-  <main>
+</header>
+<main>
     {% block article %}
     {% endblock %}
-  </main>
-  <footer>
+</main>
+<footer>
 
-  </footer>
+</footer>
 </body>
 </html>
