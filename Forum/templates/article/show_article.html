@@ -5,9 +5,7 @@
     <article class="area">
         {% autoescape off %}
             <div class="article">
-                <div id="id_header_article">
-                    <h1>{{ p.title }}</h1>
-                </div>
+                <h1>{{ p.title }}</h1>
                 {{ p.text|linebreaks }}
                 <p>Автор статьи: <a
                         href="{{ p.author.get_absolute_url }}"><b>{{ p.author.username|default:"Не известен" }}</b></a>

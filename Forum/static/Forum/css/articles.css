@@ -3,6 +3,7 @@ body {
     margin: 0;
     background-color: black;
     color: lavenderblush;
+    min-width: 940px;
 }
 
 .container {
@@ -23,7 +24,8 @@ main {
 }
 
 .area {
-    width: 65%;
+
+    width: 70%;
     background-color: #121212;
     border-radius: 1em;
     height: 1080px;

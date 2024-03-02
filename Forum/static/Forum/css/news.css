@@ -3,6 +3,7 @@ body {
     margin: 0;
     background-color: black;
     color: gainsboro;
+    min-width: 980px;
 }
 
 a {
@@ -39,9 +40,10 @@ main > .container {
     justify-content: space-between;
 }
 
-main .container .vertical {
+main .container.vertical {
     flex-direction: column;
     width: 25%;
+    height: 100%;
 }
 
 main .container .vertical :last-child {
@@ -56,7 +58,6 @@ main .container .vertical :last-child {
     display: inline-flex;
     flex-direction: column;
     padding-bottom: 3em;
-    font-size: 0.9vw;
 }
 
 .area article img {
@@ -75,6 +76,7 @@ main nav {
     text-align: left;
     background-color: #121212;
     border-radius: 1em;
+    min-width: 200px;
 }
 
 nav img {
@@ -104,7 +106,6 @@ main article .container {
 }
 
 nav article {
-    font-size: 1vw;
     margin: 5%;
 }
 

@@ -3,6 +3,7 @@ body {
     margin: 0;
     background-color: black;
     color: lavenderblush;
+    min-width: 940px;
 }
 
 .container {

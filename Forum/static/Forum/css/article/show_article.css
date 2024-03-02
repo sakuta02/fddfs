@@ -2,12 +2,12 @@ body {
     font-family: Nunito, sans-serif;
     background-color: black;
     color: lavenderblush;
+    min-width: 1080px;
 }
 
 .container {
     display: flex;
 }
-
 header {
     font-size: 1.2em;
     margin: 1% 10%;
@@ -22,6 +22,7 @@ header .container {
     background-color: #121212;
     border-radius: 1em;
     padding: 2em;
+    font-size: 1em;
 }
 
 .area h1 {
@@ -32,14 +33,6 @@ li {
     font-weight: bold;
 }
 
-#id_header_article {
-    display: flex;
-    justify-content: space-between;
-}
-
-#id_header_article article {
-    font-size: 0.9em;
-}
 
 a {
     color: #bbbbbb;
@@ -74,7 +67,6 @@ a.ref_main:hover {
 #id_text {
     width: 100%;
     border-radius: 0.5em;
-    font-size: 1.2em;
     padding: 0.5em;
 }
 button {

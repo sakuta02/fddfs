@@ -19,6 +19,7 @@
                 <p class="err"> {{ form.photo.errors }} </p>
                 <p>{{ form.non_field_errors }}</p>
                 <button type="submit">Применить</button>
+                                <p><a href="{% url 'users:password_change' %}">Сменить пароль</a></p>
             </form>
         </div>
     </article>

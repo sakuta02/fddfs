@@ -27,7 +27,6 @@ def pages(page):
     return range(start, end)
 
 
-
 @register.simple_tag()
 def genres():
     return Genre.objects.all()

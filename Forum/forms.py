@@ -8,6 +8,7 @@ class AddPostForm(forms.ModelForm):
     genre = forms.ModelChoiceField(queryset=Genre.objects.exclude(slug='vse-kategorii'), label='Выбор жанра статьи',
                                    empty_label=None)
     tag = forms.ModelMultipleChoiceField(queryset=TagPost.objects.all(), label='Доступные тэги')
+    img = forms.ImageField(label='Вы можете загрузить фотографию к посту')
 
     class Meta:
         model = CustomArticles
@@ -25,6 +26,8 @@ class AddPostForm(forms.ModelForm):
 
 
 class EditProfileModel(forms.ModelForm):
+    photo = forms.ImageField(label="Фотография профиля")
+
     class Meta:
         model = get_user_model()
         fields = ('username', 'email', 'photo')

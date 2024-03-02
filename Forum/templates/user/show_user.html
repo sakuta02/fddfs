@@ -7,17 +7,9 @@
         <article class="main_header">
             <article class="area">
                 <article class="flex_header">
-                    {% if user == request.user %}
-                        <div class="img_side">
-                            <img src="{{ url_pic }}" alt="profile">
-                            <div class="align_center edit"><a href="{% url 'edit_profile' user.pk %}">Редактировать</a>
-                            </div>
-                        </div>
-                    {% else %}
                         <div class="full_img_side">
                             <img class="full_block" src="{{ url_pic }}" alt="profile">
                         </div>
-                    {% endif %}
                     <div class="text_side_head">
                         <div class="header_text">
                             <div class="username">{{ user.username }}</div>
@@ -31,7 +23,11 @@
                         </div>
                         <hr>
                         <p>Дата регистрации: {{ user.date_joined }}</p>
-                        <p>Права администратора: {% if user.is_staff %}есть{% else %}отсутствуют{% endif %}</p>
+                        <p>Роль: {% if user.is_staff %}администратор{% else %}пользователь{% endif %}</p>
+                        {% if user == request.user %}
+                            <p><a href="{% url 'edit_profile' user.id %}">Редактировать профиль</a></p>
+                            <p><a href="{% url 'users:log_out' %}">Выйти из аккаунта</a></p>
+                        {% endif %}
                     </div>
                 </article>
             </article>
